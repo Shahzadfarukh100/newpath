@@ -6,5 +6,8 @@
     "default": 10,
     "max": 50
   },
+  "auth": {
+    "secret": "ACcVKLs4RK8FuyO9XLVdDok6wu1mRRdy7PEazb1p7pkDrGKavqb8AUoMSS8vyb"
+  },
   "mongodb": "mongodb://localhost:27017/hollie"
 }

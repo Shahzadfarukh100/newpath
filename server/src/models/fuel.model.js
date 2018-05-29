@@ -1,5 +1,5 @@
 // fuel-model.js - A mongoose model
-// 
+//
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 module.exports = function (app) {
@@ -14,7 +14,8 @@ module.exports = function (app) {
     inspirations: { type: String, required: true },
     hopes: { type: String, required: true },
     stirring: { type: String, required: true },
-    invest: { type: String, required: true }
+    invest: { type: String, required: true },
+    keyStatement: { type: String, required: true }
   }, {
     timestamps: true
   });

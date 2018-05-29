@@ -1,5 +1,5 @@
 // goals-model.js - A mongoose model
-// 
+//
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 module.exports = function (app) {
@@ -7,11 +7,12 @@ module.exports = function (app) {
   const { Schema } = mongooseClient;
 
   const traits = new Schema({
-    traitsFriends: { type: String, required: true },
-    traitsAgree: { type: String, required: true },
-    traitsSuprised: { type: String, required: true },
+    traitsFriends: { type: String },
+    traitsAgree: { type: String },
+    traitsSuprised: { type: String },
     roleModels: { type: String, required: true },
-    burdens: { type: String, required: true }
+    burdens: { type: String, required: true },
+    keyStatement: { type: String, required: true }
   });
 
   const goals = new Schema({

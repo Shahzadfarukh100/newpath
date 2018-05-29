@@ -9,7 +9,7 @@
           v-model="email"
           :type="email"
           label="Email Address"
-        >  
+        >
         </v-text-field>
         <v-text-field
           v-model="password"
@@ -24,13 +24,15 @@
         <v-spacer></v-spacer>
         <div class="mt-5">
           <router-link to="/signup" class="signup mt-3">Sign up</router-link>
-        </div>  
+        </div>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+  import * as services from '../services';
+
   export default {
     name: "home",
     data() {
@@ -42,7 +44,13 @@
     },
     methods: {
       async login() {
-
+        const user = {
+          strategy: 'local',
+          email: this.email,
+          password: this.password
+        };
+        let login = await services.app.authenticate(user);
+        console.log('login', login);
       }
     }
   };

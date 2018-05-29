@@ -6,7 +6,7 @@
           v-model="email"
           :type="email"
           label="Email Address"
-        >  
+        >
         </v-text-field>
         <v-text-field
           v-model="password"
@@ -16,6 +16,10 @@
           :append-icon-cb="() => (hidePassword = !hidePassword)"
         ></v-text-field>
         <v-text-field
+          v-model="title"
+          label="Title"
+        ></v-text-field>
+        <v-text-field
           v-model="fName"
           label="First Name"
         ></v-text-field>
@@ -23,7 +27,7 @@
           v-model="lName"
           label="Last Name"
         ></v-text-field>
-        <v-btn large @click="signup()" color="primary">
+        <v-btn large @click.native="signup()" color="primary">
           Create an Account
         </v-btn>
       </v-flex>
@@ -32,6 +36,8 @@
 </template>
 
 <script>
+  import * as services from '../services';
+
   export default {
     name: 'signup',
     data() {
@@ -39,12 +45,23 @@
         hidePassword: true,
         email: '',
         password: '',
+        title: '',
         fName: '',
         lName: ''
       }
     },
     methods: {
-      
+      async signup() {
+        const user = {
+          email: this.email,
+          password: this.password,
+          title: this.title,
+          fName: this.fName,
+          lName: this.lName
+        };
+        let request = await services.userService.create(user);
+        console.log('request', request);
+      }
     }
   }
 </script>
