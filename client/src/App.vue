@@ -74,20 +74,25 @@
         <span class="hidden-sm-and-down">My New Path</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>apps</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>notifications</v-icon>
-      </v-btn>
-      <v-btn icon large>
-        <v-avatar size="32px" tile>
-          <img
-            src="https://vuetifyjs.com/static/doc-images/logo.svg"
-            alt="Vuetify"
-          >
-        </v-avatar>
-      </v-btn>
+      <v-toolbar-items class="hidden-sm-and-down" v-if="!loggedIn">
+        <v-btn flat @click="nav('/login')">
+          <router-link to="/login" class="white--text">
+            Login
+          </router-link>
+        </v-btn>
+        <v-btn flat @click="nav('/signup')">
+          <router-link to="/signup" class="white--text">
+            Signup
+          </router-link>
+        </v-btn>
+      </v-toolbar-items>
+      <v-toolbar-items class="hidden-sm-and-down" v-else>
+        <v-btn flat @click="nav('/logout')">
+          <router-link to="/logout" class="white--text">
+            Logout
+          </router-link>
+        </v-btn>
+      </v-toolbar-items>
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height>
@@ -107,22 +112,69 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-
+    <v-snackbar
+      :text="message"
+      :top="y === 'top'"
+      :bottom="y === 'bottom'"
+      :left="x === 'left'"
+      :right="x === 'right'"
+      :color="color"
+      v-model="snackbar"
+    >
+      {{ message }}
+      <v-btn flat dark @click="snackbar = false">
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
 <script>
+  import { EventBus } from './services/eventBus';
+
   export default {
     data: () => ({
       dialog: false,
       drawer: null,
       items: [
-        { icon: 'account_circle', text: 'Login', link: '/' },
+        { icon: 'account_circle', text: 'Login', link: '/login' },
         { icon: 'format_align_left', text: 'Form' }
-      ]
+      ],
+      loggedIn: !!window.localStorage.getItem('feathers-jwt'),
+      snackbar: false,
+      message: '',
+      y: 'bottom',
+      x: null,
+      color: ''
     }),
     props: {
       source: String
+    },
+    methods: {
+      nav(page) {
+        this.$router.push(page);
+        if (page === '/logout') {
+          this.showSnackbar('You have been logged out', 'bottom', null, 'success');
+        }
+      },
+      showSnackbar(text, yPos = 'bottom', xPos, color) {
+        this.message = text;
+        this.y = yPos;
+        this.x = xPos;
+        this.color = color;
+        this.snackbar = true;
+      },
+      checkAuth() {
+        this.loggedIn = !!window.localStorage.getItem('feathers-jwt');
+      }
+    },
+    mounted() {
+      EventBus.$on('showSnackbar', (text, yPos, xPos, color) => {
+        this.showSnackbar(text, yPos, xPos, color);
+      });
+    },
+    watch: {
+      '$route': 'checkAuth'
     }
   }
 </script>

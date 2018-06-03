@@ -37,6 +37,8 @@
 
 <script>
   import * as services from '../services';
+  import { wrapper } from '../modules/asyncWrapper';
+  import { EventBus } from '../services/eventBus';
 
   export default {
     name: 'signup',
@@ -59,8 +61,13 @@
           fName: this.fName,
           lName: this.lName
         };
-        let request = await services.userService.create(user);
-        console.log('request', request);
+        const {error, data} = await wrapper(services.userService.create(user));
+        if (error) {
+          EventBus.$emit('showSnackbar', `There was an error signing up: ${error}`, 'bottom', null, 'error');
+        } else {
+          EventBus.$emit('showSnackbar', `You have successfully signed up! Please login now.`, 'bottom', null, 'success');
+          this.$router.push('/login');
+        }
       }
     }
   }

@@ -32,6 +32,8 @@
 
 <script>
   import * as services from '../services';
+  import wrapper from '../modules/asyncWrapper';
+  import { EventBus } from '../services/eventBus';
 
   export default {
     name: "home",
@@ -39,7 +41,10 @@
       return {
         hidePassword: true,
         email: '',
-        password: ''
+        password: '',
+        color: '',
+        message: '',
+        show: false
       }
     },
     methods: {
@@ -49,8 +54,13 @@
           email: this.email,
           password: this.password
         };
-        let login = await services.app.authenticate(user);
-        console.log('login', login);
+        const {err, data} = await wrapper(services.app.authenticate(user));
+        if (err) {
+          EventBus.$emit('showSnackbar', `There was an error logging in: ${err}`, 'bottom', null, 'error');
+        } else {
+          EventBus.$emit('showSnackbar', 'Successfully logged in', 'bottom', null, 'success');
+          this.$router.push({ path: '/' });
+        }
       }
     }
   };
