@@ -1,5 +1,6 @@
 <template>
   <v-app id="inspire">
+    <!--
     <v-navigation-drawer
       :clipped="$vuetify.breakpoint.lgAndUp"
       v-model="drawer"
@@ -62,10 +63,9 @@
         </template>
       </v-list>
     </v-navigation-drawer>
+    -->
     <v-toolbar
       :clipped-left="$vuetify.breakpoint.lgAndUp"
-      color="blue darken-3"
-      dark
       app
       fixed
     >
@@ -96,22 +96,13 @@
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height>
-        <v-layout justify-center align-center>
-          <router-view></router-view>
+        <v-layout justify-center>
+          <v-flex xs12>
+            <router-view :user="user"></router-view>
+          </v-flex>
         </v-layout>
       </v-container>
     </v-content>
-    <v-btn
-      fab
-      bottom
-      right
-      color="pink"
-      dark
-      fixed
-      @click.stop="dialog = !dialog"
-    >
-      <v-icon>add</v-icon>
-    </v-btn>
     <v-snackbar
       :text="message"
       :top="y === 'top'"
@@ -131,6 +122,8 @@
 
 <script>
   import { EventBus } from './services/eventBus';
+  import * as services from './services';
+  import wrapper from './modules/asyncWrapper';
 
   export default {
     data: () => ({
@@ -145,7 +138,8 @@
       message: '',
       y: 'bottom',
       x: null,
-      color: ''
+      color: '',
+      user: null
     }),
     props: {
       source: String
@@ -166,15 +160,37 @@
       },
       checkAuth() {
         this.loggedIn = !!window.localStorage.getItem('feathers-jwt');
+      },
+      async authenticate() {
+        const {error, data} = await wrapper(services.app.authenticate());
+        if (error) {
+          this.$router.push('/login');
+        }
+        if (data) {
+          this.user = data.user;
+        }
       }
     },
     mounted() {
       EventBus.$on('showSnackbar', (text, yPos, xPos, color) => {
         this.showSnackbar(text, yPos, xPos, color);
       });
+      this.authenticate();
     },
     watch: {
       '$route': 'checkAuth'
     }
   }
 </script>
+
+<style>
+  .application.theme--light {
+    background: #ebf3e9 !important;
+  }
+  .application .theme--light.toolbar, .theme--light .toolbar {
+    background-color: #ebf3e9 !important;
+  }
+  .container {
+    padding-top: 0 !important;
+  }
+</style>

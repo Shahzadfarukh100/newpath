@@ -23,3 +23,8 @@ socket.on('reconnect', () => {
 });
 
 export const userService = app.service('users');
+export const destinationService = app.service('journey');
+export const fuelService = app.service('fuel');
+export const goalsService = app.service('goals');
+export const guardrailsService = app.service('guardrails');
+export const blogService = app.service('blogs');

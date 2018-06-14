@@ -1,23 +1,41 @@
 <template>
   <v-container>
-    <v-layout row wrap justify-center>
-      <topnav></topnav>
-      <v-flex xs12 row>
-        <pathfooter></pathfooter>
+    <v-layout justify-center>
+      <v-flex xs12 v-if="!loggedIn">
+        <v-card class="text-xs-center pa-5">
+          <h1>
+            My New Path
+          </h1>
+          <img src="http://via.placeholder.com/350x150">
+          <p>
+            To continue, please <a href="/login">login</a> or <a href="/signup">Signup</a> first.
+          </p>
+        </v-card>
+      </v-flex>
+      <v-flex xs12 v-else>
+        <v-card class="text-xs-center pa-5 mountains">
+          <img src="../assets/profile.png">
+        </v-card>
+        <v-container>
+          <v-layout>
+            <v-flex xs3 class="button-row text-xs-center" v-for="button in buttonItems" :key="button.tagline">
+              <router-link :to="button.link">
+                <div class="buttonTagline">{{ button.tagline }}</div>
+                <div class="pt-2"><img :src="button.image"></div>
+                <div class="buttonTitle">{{ button.title }}</div>
+                <div class="buttonDesc">{{ button.description }}</div>
+              </router-link>
+            </v-flex>
+          </v-layout>
+        </v-container>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-  import topnav from '../components/GlobalNav';
-  import pathfooter from '../components/GlobalFooter';
-
   export default {
-    components: {
-      topnav,
-      pathfooter
-    },
+    name: 'topnav',
     data() {
       return {
         loggedIn: !!window.localStorage.getItem('feathers-jwt'),

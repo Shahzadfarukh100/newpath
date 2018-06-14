@@ -6,11 +6,6 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
 
-  const addChange = new Schema({
-    add: { type: String, required: true },
-    change: { type: String, required: true }
-  });
-
   const journey = new Schema({
     userId: { type: Schema.Types.ObjectId, required: true },
     keyStatement: { type: String, required: true },
@@ -21,7 +16,7 @@ module.exports = function (app) {
     finances: { type: String, required: true },
     vocation: { type: String, required: true },
     perfectDay: { type: String },
-    changeHabits: { type: addChange },
+    changeHabits: { type: String },
     strengths: { type: String },
     positiveHabits: { type: String },
     negativeHabits: { type: String }

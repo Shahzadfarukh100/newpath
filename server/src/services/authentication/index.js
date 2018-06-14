@@ -16,6 +16,19 @@ module.exports = (app) => {
       remove: [
         authentication.hooks.authenticate('jwt')
       ]
+    },
+    after: {
+      create: [
+        getUser()
+      ]
     }
   });
+
+  function getUser() {
+    return async (hook) => {
+      const user = hook.params.user;
+      delete user.password;
+      hook.result.user = user;
+    };
+  }
 };

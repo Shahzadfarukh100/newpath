@@ -14,7 +14,8 @@ module.exports = function (app) {
       'Mr', 'Ms', 'Mrs', 'Miss', 'Dr', 'Prof', 'Rev', 'Sir', 'Sister', 'Father'] },
     mbtiType: { type: String, enum: [
       'INTJ', 'INTP', 'ENTJ', 'ENTJ', 'ENTP', 'INFJ', 'INFP', 'ENFJ', 'ENFP', 'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP'
-    ] }
+    ] },
+    roles: { type: [String], enum: ['member', 'admin'], default: 'member' }
   }, {
     timestamps: true
   });
