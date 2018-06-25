@@ -6,15 +6,6 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
 
-  const traits = new Schema({
-    traitsFriends: { type: String },
-    traitsAgree: { type: String },
-    traitsSuprised: { type: String },
-    roleModels: { type: String, required: true },
-    burdens: { type: String, required: true },
-    keyStatement: { type: String, required: true }
-  });
-
   const goals = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
     faith: { type: String, required: true },
@@ -23,7 +14,12 @@ module.exports = function (app) {
     health: { type: String, required: true },
     finances: { type: String, required: true },
     vocation: { type: String, required: true },
-    traits: { type: traits }
+    traitsFriends: { type: String },
+    traitsAgree: { type: String },
+    traitsSuprised: { type: String },
+    roleModels: { type: String, required: true },
+    burdens: { type: String, required: true },
+    keyStatement: { type: String, required: true }
   }, {
     timestamps: true
   });

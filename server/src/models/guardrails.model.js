@@ -12,7 +12,7 @@ module.exports = function (app) {
 
   const guardrails = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
-    keyStatements: { type: [keyStatement], required: true },
+    keyStatement: { type: String, required: true },
     faith: { type: String, required: true },
     relationships: { type: String, required: true },
     character: { type: String, required: true },
@@ -21,8 +21,8 @@ module.exports = function (app) {
     vocation: { type: Boolean, required: true },
     goalThreats: { type: String, required: true },
     focusItems: { type: String, required: true },
-    encouragement: { type: String, required: true },
     pitfalls: { type: String, required: true },
+    encouragement: { type: String, required: true },
     tendencies: { type: String, required: true },
     agreements: { type: String, required: true },
     principles: { type: String, required: true },

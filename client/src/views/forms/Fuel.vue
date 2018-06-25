@@ -6,7 +6,7 @@
         <v-card class="pa-5">
           <div class="text-xs-center">
             <h1>
-              DESTINATION
+              FUEL
             </h1>
           </div>
           <v-form
@@ -16,76 +16,57 @@
             lazy-validation
           >
             <v-text-field
-              label="What do you want to have accomplished in the next 5 years?"
+              label="What motivates you? What gets and keeps you going even in hard times?"
+              required
               v-model="item.keyStatement"
+              :rules="requiredRule"
+            ></v-text-field>
+            <v-text-field
+              label="Why do think God made you with your unique design?"
+              v-model="item.uniqueDesign"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, what do you want your Faith, relationship with God, to look like (i.e. Devotions, beliefs, prayer, church community, etc.)?"
-              v-model="item.faith"
+              label="What do you believe your purpose is on this earth?"
+              v-model="item.purpose"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, what relationships do you have or hope to have? Who are they?"
-              v-model="item.relationships"
-              required
-              hint="These relationships can include boss, family, friends, etc. This statement needs to be a positive statement to guide these relationships."
-              :rules="requiredRule"
-            ></v-text-field>
-            <v-text-field
-              label="In five years, what do you want your reputation to be. How have you conducted yourself? What do you want people to say about you?"
-              v-model="item.character"
+              label="What are you passionate about?"
+              v-model="item.passions"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, describe your health you desire to have?"
-              v-model="item.health"
+              label="What causes or issues are you drawn to?"
+              v-model="item.causes"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, where do you want your finances to be in a general sense (savings, debt, income, student loans, etc)?"
-              v-model="item.finances"
+              label="Who are the people who inspire you?"
+              v-model="item.inspirations"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, what do you hope to have accomplished for your career or job? What do you hope to be doing as your career or job?"
-              v-model="item.vocation"
+              label="What people in your life bring hope into your life and future?"
+              v-model="item.hopes"
               required
               :rules="requiredRule"
             ></v-text-field>
-
-            <p>
-              Ask your friends these questions to understand yourself better. You can
-              also ask them where they see you in these 6 realms in 5 years. You can
-              also ask a friend these questions to help answer the above questions.
-            </p>
             <v-text-field
-              label="Ask a friend what traits you have that they believe would lead you to success in five years."
-              v-model="item.traitsFriends"
-            ></v-text-field>
-            <v-text-field
-              label="What traits did you agree with?"
-              v-model="item.traitsAgree"
-            ></v-text-field>
-            <v-text-field
-              label="Were there any traits that you were surprised to hear? If so, what were they?"
-              v-model="item.traitsSurprised"
-            ></v-text-field>
-            <v-text-field
-              label="Who are your role models? Is there someone whom you both want to emulate and think you could emulate? Why?"
+              label="Ask a friend what or who emotionally stirs you? What puts 'fire' in your soul?"
+              v-model="item.stirring"
               required
-              v-model="item.roleModels"
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="Is there something that particularly burdens you or that you want to improve about the world?"
+              label="Ask a friend what you talk the most about and 'invest' (time, money, etc) in."
               required
-              v-model="item.burdens"
+              v-model="item.invest"
               :rules="requiredRule"
             ></v-text-field>
             <v-btn color="primary" large @click="submit()">
@@ -112,7 +93,7 @@
   import { EventBus } from '../../services/eventBus';
 
   export default {
-    name: 'destination',
+    name: 'fuel',
     props: ['user'],
     components: {
       topnav,
@@ -122,17 +103,15 @@
       return {
         item: {
           userId: '',
-          keyStatement: '',
-          faith: '',
-          relationships: '',
-          character: '',
-          health: '',
-          finances: '',
-          vocation: '',
-          traitsAgree: '',
-          traitsSuprised: '',
-          roleModels: '',
-          burdens: ''
+          uniqueDesign: '',
+          purpose: '',
+          passions: '',
+          causes: '',
+          inspirations: '',
+          hopes: '',
+          stirring: '',
+          invest: '',
+          keyStatement: ''
         },
         valid: true,
         requiredRule: [
@@ -143,7 +122,7 @@
     methods: {
       async fetch() {
         console.log('user', this.user);
-        const {error, data} = await wrapper(services.goalsService.find({query: {userId: this.user._id}}));
+        const {error, data} = await wrapper(services.fuelService.find({query: {userId: this.user._id}}));
         if (data && data.data.length > 0 && data.data[0]) {
           console.log('data', data);
           this.item = data.data[0];
@@ -153,7 +132,7 @@
         console.log('item', this.item);
         this.item.userId = this.user._id;
         if (this.$refs.form.validate()) {
-          const {error, data} = await wrapper(services.goalsService.create(this.item));
+          const {error, data} = await wrapper(services.fuelService.create(this.item));
           if (error) {
             EventBus.$emit('showSnackbar', `There was an error saving your data: ${error}`, 'bottom', null, 'error');
           } else {
@@ -167,10 +146,10 @@
       }
     },
     mounted() {
-      if (!this.user || !this.user._id) {
+      console.log('item', this.item);
+      if (!this.user) {
         services.app.authenticate()
           .then(res => {
-            console.log('res', res);
             this.user = res.user;
           })
           .then(() => {

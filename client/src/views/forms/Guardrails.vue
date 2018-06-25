@@ -6,7 +6,7 @@
         <v-card class="pa-5">
           <div class="text-xs-center">
             <h1>
-              DESTINATION
+              GUARDRAILS
             </h1>
           </div>
           <v-form
@@ -16,76 +16,93 @@
             lazy-validation
           >
             <v-text-field
-              label="What do you want to have accomplished in the next 5 years?"
+              label="What does my life need to focus on?"
               v-model="item.keyStatement"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, what do you want your Faith, relationship with God, to look like (i.e. Devotions, beliefs, prayer, church community, etc.)?"
+              label="Do you have any threats to your Faith that could pull you away from your goal Destination?"
               v-model="item.faith"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, what relationships do you have or hope to have? Who are they?"
+              label="Do you have any current Relationships that do not align with or may pull you off track from you relationship goals?"
               v-model="item.relationships"
               required
-              hint="These relationships can include boss, family, friends, etc. This statement needs to be a positive statement to guide these relationships."
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, what do you want your reputation to be. How have you conducted yourself? What do you want people to say about you?"
+              label="Character increases our capacity and enables us to strive for goals. What area of your character needs to be strengthened?"
               v-model="item.character"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, describe your health you desire to have?"
+              label="What could hinder you to achieve your Health goals?"
               v-model="item.health"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, where do you want your finances to be in a general sense (savings, debt, income, student loans, etc)?"
+              label="In your Finances, what are some things that you tend to purchase without budgeting?"
               v-model="item.finances"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, what do you hope to have accomplished for your career or job? What do you hope to be doing as your career or job?"
+              label="Do you have a clear goal for your Vocation in 5 years? If so, what is it?"
               v-model="item.vocation"
               required
               :rules="requiredRule"
             ></v-text-field>
-
-            <p>
-              Ask your friends these questions to understand yourself better. You can
-              also ask them where they see you in these 6 realms in 5 years. You can
-              also ask a friend these questions to help answer the above questions.
-            </p>
             <v-text-field
-              label="Ask a friend what traits you have that they believe would lead you to success in five years."
-              v-model="item.traitsFriends"
-            ></v-text-field>
-            <v-text-field
-              label="What traits did you agree with?"
-              v-model="item.traitsAgree"
-            ></v-text-field>
-            <v-text-field
-              label="Were there any traits that you were surprised to hear? If so, what were they?"
-              v-model="item.traitsSurprised"
-            ></v-text-field>
-            <v-text-field
-              label="Who are your role models? Is there someone whom you both want to emulate and think you could emulate? Why?"
+              label="What are some 'threats' that pull you off track or lead you away from accomplishing goals?"
               required
-              v-model="item.roleModels"
+              v-model="item.goalThreats"
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="Is there something that particularly burdens you or that you want to improve about the world?"
+              label="What are things that help you stay focused?"
               required
-              v-model="item.burdens"
+              v-model="item.focusItems"
+              :rules="requiredRule"
+            ></v-text-field>
+            <v-text-field
+              label="Do you have a pitfall that you may struggle with?"
+              required
+              v-model="item.pitfalls"
+              :rules="requiredRule"
+            ></v-text-field>
+            <v-text-field
+              label="What are the things that really encourage me to 'do what is right'?"
+              required
+              v-model="item.encouragement"
+              :rules="requiredRule"
+            ></v-text-field>
+            <v-text-field
+              label="Do I have any consistent tendencies or choices that cause me problems (blind spots)?"
+              required
+              v-model="item.tendencies"
+              :rules="requiredRule"
+            ></v-text-field>
+            <v-text-field
+              label="Do you agree with the answers and would you add anything else?"
+              required
+              v-model="item.agreements"
+              :rules="requiredRule"
+            ></v-text-field>
+            <v-text-field
+              label="What principles protect most of your LifeCriticals?"
+              required
+              v-model="item.principles"
+              :rules="requiredRule"
+            ></v-text-field>
+            <v-text-field
+              label="What do you expect the outcome to be with this guardrail?"
+              required
+              v-model="item.expectedOutcome"
               :rules="requiredRule"
             ></v-text-field>
             <v-btn color="primary" large @click="submit()">
@@ -112,7 +129,7 @@
   import { EventBus } from '../../services/eventBus';
 
   export default {
-    name: 'destination',
+    name: 'guardrails',
     props: ['user'],
     components: {
       topnav,
@@ -129,10 +146,14 @@
           health: '',
           finances: '',
           vocation: '',
-          traitsAgree: '',
-          traitsSuprised: '',
-          roleModels: '',
-          burdens: ''
+          goalThreats: '',
+          focusItems: '',
+          encouragement: '',
+          pitfalls: '',
+          tendencies: '',
+          agreements: '',
+          principles: '',
+          expectedOutcome: ''
         },
         valid: true,
         requiredRule: [
@@ -143,7 +164,7 @@
     methods: {
       async fetch() {
         console.log('user', this.user);
-        const {error, data} = await wrapper(services.goalsService.find({query: {userId: this.user._id}}));
+        const {error, data} = await wrapper(services.guardrailsService.find({query: {userId: this.user._id}}));
         if (data && data.data.length > 0 && data.data[0]) {
           console.log('data', data);
           this.item = data.data[0];
@@ -153,7 +174,7 @@
         console.log('item', this.item);
         this.item.userId = this.user._id;
         if (this.$refs.form.validate()) {
-          const {error, data} = await wrapper(services.goalsService.create(this.item));
+          const {error, data} = await wrapper(services.guardrailsService.create(this.item));
           if (error) {
             EventBus.$emit('showSnackbar', `There was an error saving your data: ${error}`, 'bottom', null, 'error');
           } else {
@@ -167,10 +188,10 @@
       }
     },
     mounted() {
-      if (!this.user || !this.user._id) {
+      console.log('item', this.item);
+      if (!this.user) {
         services.app.authenticate()
           .then(res => {
-            console.log('res', res);
             this.user = res.user;
           })
           .then(() => {
@@ -184,5 +205,8 @@
 </script>
 
 <style>
-
+  .input-group label {
+    text-overflow: unset !important;
+    overflow: visible !important;
+  }
 </style>

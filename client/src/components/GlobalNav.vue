@@ -19,7 +19,7 @@
         <v-container>
           <v-layout>
             <v-flex xs3 class="button-row text-xs-center" v-for="button in buttonItems" :key="button.tagline">
-              <router-link :to="button.link">
+              <router-link :to="button.link" :user="user">
                 <div class="buttonTagline">{{ button.tagline }}</div>
                 <div class="pt-2"><img :src="button.image"></div>
                 <div class="buttonTitle">{{ button.title }}</div>
@@ -36,6 +36,7 @@
 <script>
   export default {
     name: 'topnav',
+    props: ['user'],
     data() {
       return {
         loggedIn: !!window.localStorage.getItem('feathers-jwt'),

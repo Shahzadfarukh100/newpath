@@ -5,6 +5,9 @@ import Login from './views/Login.vue';
 import Signup from './views/Signup.vue';
 import Admin from './views/Admin.vue';
 import Destination from './views/forms/Destination.vue';
+import Fuel from './views/forms/Fuel.vue';
+import Guardrails from './views/forms/Guardrails.vue';
+import Journey from './views/forms/Journey.vue';
 import * as services from './services';
 import wrapper from './modules/asyncWrapper';
 
@@ -61,6 +64,21 @@ export default new Router({
       path: '/destination',
       name: 'destination',
       component: Destination,
+      beforeEnter: requiresAuth
+    }, {
+      path: '/journey',
+      name: 'journey',
+      component: Journey,
+      beforeEnter: requiresAuth
+    }, {
+      path: '/fuel',
+      name: 'fuel',
+      component: Fuel,
+      beforeEnter: requiresAuth
+    }, {
+      path: '/guardrails',
+      name: 'guardrails',
+      component: Guardrails,
       beforeEnter: requiresAuth
     }, {
       path: '/logout',

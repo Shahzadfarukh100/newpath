@@ -16,6 +16,7 @@ module.exports = function (app) {
     finances: { type: String, required: true },
     vocation: { type: String, required: true },
     perfectDay: { type: String },
+    addHabits: { type: String },
     changeHabits: { type: String },
     strengths: { type: String },
     positiveHabits: { type: String },

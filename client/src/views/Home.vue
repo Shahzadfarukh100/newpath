@@ -18,37 +18,14 @@
       topnav,
       pathfooter
     },
+    props: ['user'],
     data() {
       return {
         loggedIn: !!window.localStorage.getItem('feathers-jwt'),
-        buttonItems: [
-          {
-            link: '/destination',
-            tagline: 'Where I want to go...',
-            image: 'http://via.placeholder.com/150',
-            title: 'DESTINATION',
-            description: 'In 5 years, I want to be in charge of a non-profit organization that improves the lives of children in third-world countries.'
-          }, {
-            link: '/fuel',
-            tagline: 'Why I want to do it...',
-            image: 'http://via.placeholder.com/150',
-            title: 'FUEL',
-            description: 'Seeing other children in need makes me think of my own kids and how I would feel if I were the parent of a child who was suffering.'
-          }, {
-            link: '/journey',
-            tagline: 'How I\'m going to do it...',
-            image: 'http://via.placeholder.com/150',
-            title: 'JOURNEY',
-            description: 'TODAY, I will set daily reminders to lorem ipsum dolor sit amet, consecteur adiipiscing elit.'
-          }, {
-            link: '/guardrails',
-            tagline: 'What will keep me on track...',
-            image: 'http://via.placeholder.com/150',
-            title: 'GUARD RAILS',
-            description: 'Lorem ipsum dolor sit amet, consecteur adiipiscing elit.'
-          }
-        ]
       }
+    },
+    mounted() {
+      console.log('user', this.user);
     }
   }
 </script>

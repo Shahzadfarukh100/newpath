@@ -6,7 +6,7 @@
         <v-card class="pa-5">
           <div class="text-xs-center">
             <h1>
-              DESTINATION
+              JOURNEY
             </h1>
           </div>
           <v-form
@@ -16,47 +16,68 @@
             lazy-validation
           >
             <v-text-field
-              label="What do you want to have accomplished in the next 5 years?"
+              label="What do I accomplish in a day? How does my daily lifestyle impact my future and achieve my goals?"
               v-model="item.keyStatement"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, what do you want your Faith, relationship with God, to look like (i.e. Devotions, beliefs, prayer, church community, etc.)?"
+              label="How do I daily build my faith?"
               v-model="item.faith"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, what relationships do you have or hope to have? Who are they?"
+              label="How do I strengthen my important relationships each day?"
               v-model="item.relationships"
               required
-              hint="These relationships can include boss, family, friends, etc. This statement needs to be a positive statement to guide these relationships."
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, what do you want your reputation to be. How have you conducted yourself? What do you want people to say about you?"
+              label="What areas of my character need to be improved, and how do I work on them daily?"
               v-model="item.character"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, describe your health you desire to have?"
+              label="What are my daily habit that produce a physically healthy lifestyle?"
               v-model="item.health"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, where do you want your finances to be in a general sense (savings, debt, income, student loans, etc)?"
+              label="How does my daily/ monthly spending and saving support my financial Destination goals?"
               v-model="item.finances"
               required
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="In five years, what do you hope to have accomplished for your career or job? What do you hope to be doing as your career or job?"
+              label="What do activities do I complete daily or regularly to improve my skills for my vocation?"
               v-model="item.vocation"
               required
               :rules="requiredRule"
+            ></v-text-field>
+
+            <p>
+              If you are still struggling to answer these questions to create your LifeMap&copy; destination, try this project.
+            </p>
+            <v-text-field
+              label="What does a perfect day look like for you?"
+              v-model="item.perfectDay"
+              hint="This should not be a vacation day, holiday, or 'day at the beach.' This should be a regular day in your vocation."
+            ></v-text-field>
+
+            <p>
+              What are some things that you need to add or change in your regular
+              habits that could produce your "perfect day" more frequently?
+            </p>
+            <v-text-field
+              label="Things to add"
+              v-model="item.addHabits"
+            ></v-text-field>
+            <v-text-field
+              label="Things to change"
+              v-model="item.changeHabits"
             ></v-text-field>
 
             <p>
@@ -65,27 +86,19 @@
               also ask a friend these questions to help answer the above questions.
             </p>
             <v-text-field
-              label="Ask a friend what traits you have that they believe would lead you to success in five years."
-              v-model="item.traitsFriends"
+              label="Ask a friend what strengths and habits support your goals for 5 years from now."
+              v-model="item.strengths"
             ></v-text-field>
             <v-text-field
-              label="What traits did you agree with?"
-              v-model="item.traitsAgree"
-            ></v-text-field>
-            <v-text-field
-              label="Were there any traits that you were surprised to hear? If so, what were they?"
-              v-model="item.traitsSurprised"
-            ></v-text-field>
-            <v-text-field
-              label="Who are your role models? Is there someone whom you both want to emulate and think you could emulate? Why?"
+              label="What habits are positive for your lifestyle and Destination?"
               required
-              v-model="item.roleModels"
+              v-model="item.positiveHabits"
               :rules="requiredRule"
             ></v-text-field>
             <v-text-field
-              label="Is there something that particularly burdens you or that you want to improve about the world?"
+              label="What habits could hold you back, and how can you eliminate or minimalize them?"
               required
-              v-model="item.burdens"
+              v-model="item.negativeHabits"
               :rules="requiredRule"
             ></v-text-field>
             <v-btn color="primary" large @click="submit()">
@@ -129,10 +142,12 @@
           health: '',
           finances: '',
           vocation: '',
-          traitsAgree: '',
-          traitsSuprised: '',
-          roleModels: '',
-          burdens: ''
+          perfectDay: '',
+          addHabits: '',
+          changeHabits: '',
+          strengths: '',
+          positiveHabits: '',
+          negativeHabits: ''
         },
         valid: true,
         requiredRule: [
@@ -143,7 +158,7 @@
     methods: {
       async fetch() {
         console.log('user', this.user);
-        const {error, data} = await wrapper(services.goalsService.find({query: {userId: this.user._id}}));
+        const {error, data} = await wrapper(services.destinationService.find({query: {userId: this.user._id}}));
         if (data && data.data.length > 0 && data.data[0]) {
           console.log('data', data);
           this.item = data.data[0];
@@ -153,7 +168,7 @@
         console.log('item', this.item);
         this.item.userId = this.user._id;
         if (this.$refs.form.validate()) {
-          const {error, data} = await wrapper(services.goalsService.create(this.item));
+          const {error, data} = await wrapper(services.destinationService.create(this.item));
           if (error) {
             EventBus.$emit('showSnackbar', `There was an error saving your data: ${error}`, 'bottom', null, 'error');
           } else {
@@ -170,7 +185,6 @@
       if (!this.user || !this.user._id) {
         services.app.authenticate()
           .then(res => {
-            console.log('res', res);
             this.user = res.user;
           })
           .then(() => {
