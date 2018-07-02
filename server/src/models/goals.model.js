@@ -19,7 +19,8 @@ module.exports = function (app) {
     traitsSuprised: { type: String },
     roleModels: { type: String, required: true },
     burdens: { type: String, required: true },
-    keyStatement: { type: String, required: true }
+    keyStatement: { type: String, required: true },
+    status: { type: String, enum: ['Complete', 'Incomplete'], default: 'Incomplete', required: true }
   }, {
     timestamps: true
   });

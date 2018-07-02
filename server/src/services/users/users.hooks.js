@@ -5,7 +5,19 @@ module.exports = {
   before: {
     all: [],
     find: [
-      auth.hooks.authenticate('jwt')
+      auth.hooks.authenticate('jwt'),
+      async (hook) => {
+        if ('_aggregate' in hook.params.query) {
+          console.log('found _aggregate');
+          try {
+            hook.result = await hook.service.Model.aggregate([hook.params.query._aggregate]).exec();
+            console.log('res', hook.result);
+          } catch(ex) {
+            console.log('ex', ex);
+            hook.result = ex;
+          }
+        }
+      }
     ],
     get: [
       auth.hooks.authenticate('jwt')

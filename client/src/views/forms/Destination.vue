@@ -152,6 +152,7 @@
       async submit() {
         console.log('item', this.item);
         this.item.userId = this.user._id;
+        this.item.status = 'Complete';
         if (this.$refs.form.validate()) {
           const {error, data} = await wrapper(services.goalsService.create(this.item));
           if (error) {

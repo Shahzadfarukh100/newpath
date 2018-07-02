@@ -20,7 +20,8 @@ module.exports = function (app) {
     changeHabits: { type: String },
     strengths: { type: String },
     positiveHabits: { type: String },
-    negativeHabits: { type: String }
+    negativeHabits: { type: String },
+    status: { type: String, enum: ['Complete', 'Incomplete'], required: true, default: 'Incomplete' }
   }, {
     timestamps: true
   });

@@ -4,6 +4,7 @@ import Home from './views/Home';
 import Login from './views/Login.vue';
 import Signup from './views/Signup.vue';
 import Admin from './views/Admin.vue';
+import Users from './views/Users.vue';
 import Destination from './views/forms/Destination.vue';
 import Fuel from './views/forms/Fuel.vue';
 import Guardrails from './views/forms/Guardrails.vue';
@@ -59,6 +60,11 @@ export default new Router({
       path: '/admin',
       name: 'admin',
       component: Admin,
+      beforeEnter: requiresAdmin
+    }, {
+      path: '/admin/users',
+      name: 'users',
+      component: Users,
       beforeEnter: requiresAdmin
     }, {
       path: '/destination',

@@ -76,19 +76,24 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down" v-if="!loggedIn">
         <v-btn flat @click="nav('/login')">
-          <router-link to="/login" class="white--text">
+          <router-link to="/login">
             Login
           </router-link>
         </v-btn>
         <v-btn flat @click="nav('/signup')">
-          <router-link to="/signup" class="white--text">
+          <router-link to="/signup">
             Signup
           </router-link>
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items class="hidden-sm-and-down" v-else>
+        <v-btn flat @click="nav('/admin')" v-if="isAdmin">
+          <router-link to="/admin">
+            Admin
+          </router-link>
+        </v-btn>
         <v-btn flat @click="nav('/logout')">
-          <router-link to="/logout" class="white--text">
+          <router-link to="/logout">
             Logout
           </router-link>
         </v-btn>
@@ -169,6 +174,9 @@
         if (data) {
           this.user = data.user;
         }
+      },
+      isAdmin() {
+        return (this.user && this.user.roles.includes('admin'));
       }
     },
     mounted() {

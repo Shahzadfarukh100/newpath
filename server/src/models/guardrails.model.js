@@ -26,7 +26,8 @@ module.exports = function (app) {
     tendencies: { type: String, required: true },
     agreements: { type: String, required: true },
     principles: { type: String, required: true },
-    expectedOutcome: { type: String, required: true }
+    expectedOutcome: { type: String, required: true },
+    status: { type: String, enum: ['Complete', 'Incomplete'], default: 'Incomplete', required: true }
   }, {
     timestamps: true
   });
