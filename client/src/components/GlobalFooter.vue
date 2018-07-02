@@ -10,10 +10,8 @@
               <v-flex xs2 v-for="crit in criticals" :key="crit.link" class="text-xs-center">
                 <div>
                   <router-link :to="crit.link">
-                    <img :src="crit.icon">
-                    <p>
-                      <v-icon :color="crit.color">fiber_manual_record</v-icon>
-                    </p>
+                    <img :src="crit.icon" width="40px">
+                    <p>{{ crit.label }}</p>
                   </router-link>
                 </div>
               </v-flex>
@@ -29,10 +27,8 @@
               <v-flex xs2 v-for="aid in aides" :key="aid.link" class="aidesMargin">
                 <div>
                   <router-link :to="aid.link">
-                    <img :src="aid.icon">
-                    <p>
-                      <v-icon :color="aid.color">fiber_manual_record</v-icon>
-                    </p>
+                    <img :src="aid.icon" width="40px">
+                    <p>{{ aid.label }}</p>
                   </router-link>
                 </div>
               </v-flex>
@@ -50,32 +46,32 @@
       return {
         criticals: [
           {
-            link: '/cross',
-            icon: 'http://via.placeholder.com/50x100',
-            color: 'green'
+            link: '/faith',
+            icon: '/img/icons/MyNewPath_AppIcons_Faith.png',
+            label: 'Faith'
           }, {
-            link: '/chat',
-            icon: 'http://via.placeholder.com/50x100',
-            color: 'green'
+            link: '/relationships',
+            icon: '/img/icons/MyNewPath_AppIcons_Relationships.png',
+            label: 'Relationships'
           }, {
-            link: '/doctor',
-            icon: 'http://via.placeholder.com/50x100',
-            color: 'yellow'
+            link: '/health',
+            icon: '/img/icons/MyNewPath_AppIcons_Health.png',
+            label: 'Health'
           }, {
-            link: '/book',
-            icon: 'http://via.placeholder.com/50x100',
-            color: 'green'
+            link: '/character',
+            icon: '/img/icons/MyNewPath_AppIcons_MyCharacter.png',
+            label: 'Character'
           }
         ],
         aides: [
           {
-            link: '/case',
-            icon: 'http://via.placeholder.com/50x100',
-            color: 'red'
+            link: '/vocation',
+            icon: '/img/icons/MyNewPath_AppIcons_Work.png',
+            label: 'Vocation'
           }, {
-            link: '/bank',
-            icon: 'http://via.placeholder.com/50x100',
-            color: 'red'
+            link: '/finances',
+            icon: '/img/icons/MyNewPath_AppIcons_Finances.png',
+            label: 'Finances'
           }
         ]
       }

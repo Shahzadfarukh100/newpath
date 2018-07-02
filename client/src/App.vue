@@ -199,6 +199,7 @@
     background-color: #ebf3e9 !important;
   }
   .container {
-    padding-top: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
   }
 </style>

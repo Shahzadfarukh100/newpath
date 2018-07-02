@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row wrap justify-center>
       <topnav></topnav>
-      <v-flex xs12 row>
+      <v-flex xs12 row v-if="loggedIn">
         <pathfooter></pathfooter>
       </v-flex>
     </v-layout>

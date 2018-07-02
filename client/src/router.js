@@ -69,8 +69,7 @@ export default new Router({
     }, {
       path: '/destination',
       name: 'destination',
-      component: Destination,
-      beforeEnter: requiresAuth
+      component: Destination
     }, {
       path: '/journey',
       name: 'journey',

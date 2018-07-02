@@ -1,16 +1,20 @@
 <template>
   <v-container>
     <v-layout justify-center>
-      <v-flex xs12 v-if="!loggedIn">
-        <v-card class="text-xs-center pa-5">
-          <h1>
-            My New Path
-          </h1>
-          <img src="http://via.placeholder.com/350x150">
-          <p>
-            To continue, please <a href="/login">login</a> or <a href="/signup">Signup</a> first.
-          </p>
+      <v-flex xs12 md12 v-if="!loggedIn">
+
+        <v-card class="text-xs-center pa-5 mountains">
         </v-card>
+        <v-flex xs12 md6 offset-md3>
+          <v-card class="text-xs-center pa-5" style="position: relative; top: -125px;">
+            <h1>
+              My New Path
+            </h1>
+            <p>
+              To continue, please <a href="/login">login</a> or <a href="/signup">Signup</a> first.
+            </p>
+          </v-card>
+        </v-flex>
       </v-flex>
       <v-flex xs12 v-else>
         <v-card class="text-xs-center pa-5 mountains">
@@ -18,7 +22,7 @@
         </v-card>
         <v-container>
           <v-layout>
-            <v-flex xs3 class="button-row text-xs-center" v-for="button in buttonItems" :key="button.tagline">
+            <v-flex xs12 class="button-row text-xs-center" v-for="button in buttonItems" :key="button.tagline">
               <router-link :to="button.link" :user="user">
                 <div class="buttonTagline">{{ button.tagline }}</div>
                 <div class="pt-2"><img :src="button.image"></div>
@@ -44,25 +48,25 @@
           {
             link: '/destination',
             tagline: 'Where I want to go...',
-            image: 'http://via.placeholder.com/150',
+            image: '/img/destination.svg',
             title: 'DESTINATION',
             description: 'In 5 years, I want to be in charge of a non-profit organization that improves the lives of children in third-world countries.'
           }, {
             link: '/fuel',
             tagline: 'Why I want to do it...',
-            image: 'http://via.placeholder.com/150',
+            image: '/img/fuel.svg',
             title: 'FUEL',
             description: 'Seeing other children in need makes me think of my own kids and how I would feel if I were the parent of a child who was suffering.'
           }, {
             link: '/journey',
             tagline: 'How I\'m going to do it...',
-            image: 'http://via.placeholder.com/150',
+            image: '/img/journey.svg',
             title: 'JOURNEY',
             description: 'TODAY, I will set daily reminders to lorem ipsum dolor sit amet, consecteur adiipiscing elit.'
           }, {
             link: '/guardrails',
             tagline: 'What will keep me on track...',
-            image: 'http://via.placeholder.com/150',
+            image: '/img/guardrails.svg',
             title: 'GUARD RAILS',
             description: 'Lorem ipsum dolor sit amet, consecteur adiipiscing elit.'
           }
