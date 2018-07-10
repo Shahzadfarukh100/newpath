@@ -71,7 +71,6 @@
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <span class="hidden-sm-and-down">My New Path</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down" v-if="!loggedIn">
@@ -100,7 +99,7 @@
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
-      <v-container fluid fill-height>
+      <v-container fluid fill-height main-container>
         <v-layout justify-center>
           <v-flex xs12>
             <router-view :user="user"></router-view>
@@ -201,5 +200,26 @@
   .container {
     padding: 0 !important;
     max-width: 100% !important;
+  }
+  .container.main-container {
+  padding: 0 16px 16px !important;
+  }
+  .mountains {
+  margin-left: -16px;
+  margin-right: -16px;
+  }
+  .buttonTagline {
+    color: #96c58d;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+  .buttonTitle {
+    color: #99e1f1;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  h2 {
+  font-weight:normal;
+  color: #96c58d;
   }
 </style>

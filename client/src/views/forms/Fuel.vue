@@ -1,88 +1,115 @@
 <template>
-  <v-container>
-    <v-layout row wrap justify-center>
-      <topnav></topnav>
-      <v-flex xs12 row>
-        <v-card class="pa-5">
-          <div class="text-xs-center">
-            <h1>
-              FUEL
-            </h1>
-          </div>
-          <v-form
-            name="destination"
-            ref="form"
-            v-model="valid"
-            lazy-validation
+  <v-layout row wrap justify-center>
+    <v-flex xs12 md6 row>
+      <v-card style="padding: 16px;">
+        <div class="text-xs-center card-title buttonTagline">
+          Why I want to do it...
+        </div>
+        <v-flex xs6 md4 offset-xs3 offset-md4>
+          <v-card-media
+            height="200"
+            width="100%"
+            src="/img/fuel.svg"
+            contain
           >
-            <v-text-field
-              label="What motivates you? What gets and keeps you going even in hard times?"
-              required
-              v-model="item.keyStatement"
-              :rules="requiredRule"
-            ></v-text-field>
-            <v-text-field
-              label="Why do think God made you with your unique design?"
-              v-model="item.uniqueDesign"
-              required
-              :rules="requiredRule"
-            ></v-text-field>
-            <v-text-field
-              label="What do you believe your purpose is on this earth?"
-              v-model="item.purpose"
-              required
-              :rules="requiredRule"
-            ></v-text-field>
-            <v-text-field
-              label="What are you passionate about?"
-              v-model="item.passions"
-              required
-              :rules="requiredRule"
-            ></v-text-field>
-            <v-text-field
-              label="What causes or issues are you drawn to?"
-              v-model="item.causes"
-              required
-              :rules="requiredRule"
-            ></v-text-field>
-            <v-text-field
-              label="Who are the people who inspire you?"
-              v-model="item.inspirations"
-              required
-              :rules="requiredRule"
-            ></v-text-field>
-            <v-text-field
-              label="What people in your life bring hope into your life and future?"
-              v-model="item.hopes"
-              required
-              :rules="requiredRule"
-            ></v-text-field>
-            <v-text-field
-              label="Ask a friend what or who emotionally stirs you? What puts 'fire' in your soul?"
-              v-model="item.stirring"
-              required
-              :rules="requiredRule"
-            ></v-text-field>
-            <v-text-field
-              label="Ask a friend what you talk the most about and 'invest' (time, money, etc) in."
-              required
-              v-model="item.invest"
-              :rules="requiredRule"
-            ></v-text-field>
-            <v-btn color="primary" large @click="submit()">
-              Save
-            </v-btn>
-            <v-btn flat @click="clear()">
-              Cancel
-            </v-btn>
-          </v-form>
-        </v-card>
-      </v-flex>
-      <v-flex xs12 row>
-        <pathfooter></pathfooter>
-      </v-flex>
-    </v-layout>
-  </v-container>
+          </v-card-media>
+        </v-flex>
+        <v-card-text class="text-xs-center">
+          <h1 class="buttonTitle">
+            FUEL
+          </h1>
+        </v-card-text>
+      </v-card>
+      <br>
+      <v-form
+        name="destination"
+        ref="form"
+        v-model="valid"
+        lazy-validation
+      >
+      <div class="text-xs-center">
+        <h2>Main Motivation Statement</h2>
+      </div>
+      <div class="text-xs-center">
+        <p>What motivates you? What gets and keeps you going even in hard times?</p>
+      </div>
+        <v-text-field
+          label=""
+          required
+          v-model="item.keyStatement"
+          :rules="requiredRule"
+        ></v-text-field>
+        <h3>Purpose</h3>
+        <p>What do you believe your purpose is on this earth?</p>
+        <v-text-field
+          label=""
+          v-model="item.purpose"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+        <p>Why do think God made you with your unique design?</p>
+        <v-text-field
+          label=""
+          v-model="item.uniqueDesign"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+        <h3>Passion</h3>
+        <p>What are you passionate about?</p>
+        <v-text-field
+          label=""
+          v-model="item.passions"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+        <p>What causes or issues are you drawn to?</p>
+        <v-text-field
+          label=""
+          v-model="item.causes"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+        <p>Ask a friend what or who emotionally stirs you? What puts 'fire' in your soul?</p>
+        <v-text-field
+          label=""
+          v-model="item.stirring"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+        <p>Ask a friend what you talk the most about and 'invest' (time, money, etc) in.</p>
+        <v-text-field
+          label=""
+          required
+          v-model="item.invest"
+          :rules="requiredRule"
+        ></v-text-field>
+        <h3>Inspiration</h3>
+        <p>Who are the people who inspire you?</p>
+        <v-text-field
+          label=""
+          v-model="item.inspirations"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+        <p>What people in your life bring hope into your life and future?</p>
+        <v-text-field
+          label=""
+          v-model="item.hopes"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+        <v-btn color="primary" large @click="submit()">
+          Save
+        </v-btn>
+        <v-btn flat @click="clear()">
+          Cancel
+        </v-btn>
+      </v-form>
+    </v-flex>
+    <v-flex xs12 row>
+      <pathfooter></pathfooter>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -164,5 +191,14 @@
 </script>
 
 <style>
+
+.toolbar__content {
+display:none;
+}
+
+nav.toolbar {
+height: 64px;
+box-shadow: none;
+}
 
 </style>
