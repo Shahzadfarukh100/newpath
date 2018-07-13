@@ -20,17 +20,21 @@
         <v-card class="text-xs-center pa-5 mountains">
           <img src="../assets/profile.png">
         </v-card>
-        <v-container>
-          <v-layout>
-            <v-flex xs12 class="button-row text-xs-center" v-for="button in buttonItems" :key="button.tagline">
+        <v-container grid-list-md>
+
+        <v-layout row wrap>
+
+        <v-flex md3 v-for="button in buttonItems" :key="button.tagline">
+            <v-card class="button-row text-xs-center">
               <router-link :to="button.link" :user="user">
                 <div class="buttonTagline">{{ button.tagline }}</div>
                 <div class="pt-2"><img :src="button.image"></div>
                 <div class="buttonTitle">{{ button.title }}</div>
                 <div class="buttonDesc">{{ button.description }}</div>
               </router-link>
-            </v-flex>
-          </v-layout>
+            </v-card>
+        </v-flex>
+        </v-layout>
         </v-container>
       </v-flex>
     </v-layout>
