@@ -18,14 +18,13 @@
       </v-flex>
       <v-flex xs12 v-else>
         <v-card class="text-xs-center pa-5 mountains">
-          <img src="../assets/profile.png">
         </v-card>
         <v-container grid-list-md>
 
         <v-layout row wrap>
 
         <v-flex md3 v-for="button in buttonItems" :key="button.tagline">
-            <v-card class="button-row text-xs-center">
+            <v-card class="button-row text-xs-center home-card">
               <router-link :to="button.link" :user="user">
                 <div class="buttonTagline">{{ button.tagline }}</div>
                 <div class="pt-2"><img :src="button.image"></div>
@@ -60,7 +59,7 @@
             tagline: 'Why I want to do it...',
             image: '/img/fuel.svg',
             title: 'FUEL',
-            description: 'Seeing other children in need makes me think of my own kids and how I would feel if I were the parent of a child who was suffering.'
+            description: 'Seeing other children in need makes me think of my own kids and how I would feel if I were the parent of a child...'
           }, {
             link: '/journey',
             tagline: 'How I\'m going to do it...',
@@ -84,30 +83,41 @@
   .mountains {
     background-image: url('../assets/mountains-bg.png');
     background-size: cover;
-    min-height: 200px;
+    min-height: 250px;
+    position: absolute;
+    width: 100%;
   }
   .button-row {
     z-index: 2;
     background-color: #FFF;
-    margin: -70px 10px 0 10px;
+    margin: 50px 10px 0 10px;
     padding: 5px;
   }
   .buttonTagline {
-    color: #96c58d;
+    color: #8FC186;
     font-size: 1.3rem;
     font-weight: bold;
   }
   .buttonTitle {
-    color: #99e1f1;
+    color: #8FC186;
     font-size: 2rem;
     font-weight: bolder;
   }
   .buttonDesc {
-    color: #99e1f1;
+    color: #06B7DF;
     font-style: italic;
     font-weight: bold;
   }
   a {
     text-decoration: none;
+  }
+  nav.toolbar {
+  height: 50px !important;
+  }
+  .toolbar__content {
+  height: 50px !important;
+  }
+  main.content {
+  padding: 50px 0px 0px !important;
   }
 </style>

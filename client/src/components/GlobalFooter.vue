@@ -1,39 +1,31 @@
 <template>
     <v-container>
-      <v-layout class="mt-5 iconHolder">
-        <v-flex xs8 class="text-xs-center">
+      <v-layout class="mt-5 iconHolder row wrap">
+        <v-flex md6 xs12 class="text-xs-center" style="height: auto;">
           <h3 class="bottomTagline">
             Life Criticals
           </h3>
-          <v-container>
-            <v-layout class="justify-center">
-              <v-flex xs2 v-for="crit in criticals" :key="crit.link" class="text-xs-center">
+            <v-layout class="justify-center row wrap">
+              <v-flex md2 xs6 v-for="crit in criticals" :key="crit.link" class="text-xs-center">
                 <div>
-                  <router-link :to="crit.link">
                     <img :src="crit.icon" width="40px">
                     <p>{{ crit.label }}</p>
-                  </router-link>
                 </div>
               </v-flex>
             </v-layout>
-          </v-container>
         </v-flex>
-        <v-flex xs4 class="text-xs-center">
+        <v-flex md6 xs12 class="text-xs-center" style="height: auto;">
           <h3 class="bottomTagline">
             Life Aides
           </h3>
-          <v-container>
-            <v-layout class="justify-center">
-              <v-flex xs2 v-for="aid in aides" :key="aid.link" class="aidesMargin">
+            <v-layout class="justify-center row wrap">
+              <v-flex md2 xs6 v-for="aid in aides" :key="aid.link">
                 <div>
-                  <router-link :to="aid.link">
                     <img :src="aid.icon" width="40px">
                     <p>{{ aid.label }}</p>
-                  </router-link>
                 </div>
               </v-flex>
             </v-layout>
-          </v-container>
         </v-flex>
       </v-layout>
     </v-container>
@@ -90,14 +82,17 @@
     margin: 0 20px;
   }
   .iconHolder {
-    border-top: 1px #CCC solid;
+    /*border-top: 1px solid #8FC186;*/
     padding-top: 20px;
     margin-top: 125px !important;
   }
   .bottomTagline {
-    color: #96c58d;
+    color: #8FC186;
     font-size: 1.1rem;
     font-weight: bold;
     margin-bottom: 20px;
+  }
+  .iconHolder a, .iconHolder p {
+    color: #8FC186;
   }
 </style>

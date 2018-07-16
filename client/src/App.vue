@@ -2,41 +2,27 @@
   <v-app id="inspire">
     <!--
     <transition name="slide-fade" appear>
-    <v-navigation-drawer
-      :clipped="$vuetify.breakpoint.lgAndUp"
-      v-model="drawer"
-      fixed
-      app
-    >
-      <v-list dense>
-        <v-list-tile @click="">
-          <v-list-tile-action>
-            <v-icon>home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile @click="nav('/logout')">
-          <v-list-tile-action>
-            <v-icon>contact_mail</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Contact</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
     -->
     <v-toolbar
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       app
       fixed
     >
-    <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-
-      <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-      </v-toolbar-title>
+    <div v-if="['home'].indexOf($route.name) > -1" style="width: 100%; display:block; position: absolute; top: 35px; text-align: center; margin: 0;">
+      <div style="width: 60px; height: 60px; color: #8FC186; background: #ebf3e9; display:block; text-align: center; border-radius: 30px; border: 3px solid #8FC186; margin: 0 auto; ">
+        <span style="display: inline-block; margin: 4px auto 0; text-align: center; font-size: 32px; font-weight: bold;">HP</span>
+      </div>
+    </div>
+      <v-btn flat class="back-btn" @click="nav('/')" v-if="['destination', 'fuel', 'journey', 'guardrails', 'admin', 'users'].indexOf($route.name) > -1">
+        <router-link to="/">
+          <v-icon>keyboard_arrow_left</v-icon>
+        </router-link>
+      </v-btn>
+      <v-btn flat @click="nav('/admin')" v-if="isAdmin">
+        <router-link to="/admin">
+          Admin
+        </router-link>
+      </v-btn>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down" v-if="!loggedIn">
         <v-btn flat @click="nav('/login')">
@@ -51,11 +37,6 @@
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items class="hidden-sm-and-down" v-else>
-        <v-btn flat @click="nav('/admin')" v-if="isAdmin">
-          <router-link to="/admin">
-            Admin
-          </router-link>
-        </v-btn>
         <v-btn flat @click="nav('/')">
           <router-link to="/">
             <v-icon>get_app</v-icon>
@@ -162,6 +143,9 @@
 </script>
 
 <style>
+  body {
+  background: #ebf3e9 !important;
+  }
   .application.theme--light {
     background: #ebf3e9 !important;
   }
@@ -178,16 +162,9 @@
   .mountains {
     margin-left: -16px;
     margin-right: -16px;
-  }
-  .buttonTagline {
-    color: #96c58d;
-    font-size: 1.3rem;
-    font-weight: bold;
-  }
-  .buttonTitle {
-    color: #99e1f1;
-    font-size: 2.5rem;
-    font-weight: bold;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    border-radius: 0 !important;
   }
   h2 {
     font-weight:normal;
@@ -202,5 +179,15 @@
   .slide-fade-enter, .slide-fade-leave-to {
      transform: translateX(10px);
      opacity: 0;
+   }
+   button.back-btn {
+   display:none;
+   }
+   nav.toolbar a {
+   text-decoration: none;
+   color: #8FC186;
+   }
+   .card.home-card {
+    height: 275px !important;
    }
 </style>

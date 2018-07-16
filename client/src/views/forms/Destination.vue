@@ -236,4 +236,8 @@ height: 64px;
 box-shadow: none;
 }
 
+button.back-btn {
+display:block;
+}
+
 </style>
