@@ -1,0 +1,152 @@
+<template>
+  <v-layout row wrap justify-center>
+    <v-flex xs12 md6 row>
+      <br>
+      <v-form
+        name="profile"
+        ref="form"
+        v-model="valid"
+        lazy-validation
+      >
+        <v-text-field
+          label=""
+          v-model="user.fName"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+        <v-text-field
+          label=""
+          v-model="user.lName"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+        <v-text-field
+          label=""
+          v-model="user.email"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+        <v-text-field
+          label=""
+          v-model="user.password"
+        ></v-text-field>
+        <v-text-field
+          label=""
+          v-model="user.title"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+        <v-text-field
+          label=""
+          v-model="user.mbtiType"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+        <v-text-field
+          label=""
+          v-model="user.roles"
+          required
+          :rules="requiredRule"
+        ></v-text-field>
+
+        <v-btn color="primary" large @click="submit()">
+          Save
+        </v-btn>
+        <v-btn flat @click="clear()">
+          Cancel
+        </v-btn>
+      </v-form>
+    </v-flex>
+  </v-layout>
+</template>
+
+<script>
+  import topnav from '../components/GlobalNav';
+  import * as services from '../services';
+  import wrapper from '../modules/asyncWrapper';
+  import { EventBus } from '../services/eventBus';
+
+  export default {
+    name: 'profile',
+    props: ['user'],
+    components: {
+      topnav
+    },
+    data() {
+      return {
+        item: {
+          hidePassword: false,
+          email: '',
+          password: '',
+          title: '',
+          fName: '',
+          lName: '',
+          mtbiType: '',
+          roles: ''
+        },
+        valid: true,
+        requiredRule: [
+          (v) => !!v || 'This field is required'
+        ]
+      }
+    },
+    methods: {
+      async fetch() {
+        console.log('user', this.user);
+        const {error, data} = await wrapper(services.userService.find({query: {userId: this.user._id}}));
+        if (data && data.data.length > 0 && data.data[0]) {
+          console.log('data', data);
+          this.item = data.data[0];
+        }
+      },
+      async submit() {
+        console.log('item', this.item);
+        this.item.userId = this.user._id;
+        this.item.status = 'Complete';
+        if (this.$refs.form.validate()) {
+          const {error, data} = await wrapper(services.userService.create(this.item));
+          if (error) {
+            EventBus.$emit('showSnackbar', `There was an error saving your data: ${error}`, 'bottom', null, 'error');
+          } else {
+            console.log('It is all there');
+            EventBus.$emit('showSnackbar', `Your answers have been successfully saved!`, 'bottom', null, 'success');
+          }
+        }
+      },
+      clear() {
+        this.$refs.form.reset();
+      }
+    },
+    mounted() {
+      if (!this.user || !this.user._id) {
+        services.app.authenticate()
+          .then(res => {
+            console.log('res', res);
+            this.user = res.user;
+          })
+          .then(() => {
+            this.fetch();
+          })
+      } else {
+        this.fetch();
+      }
+    }
+  }
+</script>
+
+<style>
+
+.toolbar__content {
+display:none;
+}
+
+nav.toolbar {
+height: 64px;
+box-shadow: none;
+}
+
+button.back-btn {
+display:block;
+}
+
+</style>

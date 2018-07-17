@@ -10,10 +10,12 @@
     >
     <div v-if="['home'].indexOf($route.name) > -1" style="width: 100%; display:block; position: absolute; top: 35px; text-align: center; margin: 0;">
       <div style="width: 60px; height: 60px; color: #8FC186; background: #ebf3e9; display:block; text-align: center; border-radius: 30px; border: 3px solid #8FC186; margin: 0 auto; ">
-        <span style="display: inline-block; margin: 4px auto 0; text-align: center; font-size: 32px; font-weight: bold;">HP</span>
+        <span style="display: inline-block; margin: 4px auto 0; text-align: center; font-size: 32px; font-weight: bold;"><router-link to="/profile">
+HP</router-link>
+</span>
       </div>
     </div>
-      <v-btn flat class="back-btn" @click="nav('/')" v-if="['destination', 'fuel', 'journey', 'guardrails', 'admin', 'users'].indexOf($route.name) > -1">
+      <v-btn flat class="back-btn" @click="nav('/')" v-if="['destination', 'fuel', 'journey', 'guardrails', 'admin', 'users', 'profile'].indexOf($route.name) > -1">
         <router-link to="/">
           <v-icon>keyboard_arrow_left</v-icon>
         </router-link>

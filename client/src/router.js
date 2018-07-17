@@ -5,6 +5,7 @@ import Login from './views/Login.vue';
 import Signup from './views/Signup.vue';
 import Admin from './views/Admin.vue';
 import Users from './views/Users.vue';
+import Profile from './views/Profile.vue';
 import Destination from './views/forms/Destination.vue';
 import Fuel from './views/forms/Fuel.vue';
 import Guardrails from './views/forms/Guardrails.vue';
@@ -84,6 +85,11 @@ export default new Router({
       path: '/guardrails',
       name: 'guardrails',
       component: Guardrails,
+      beforeEnter: requiresAuth
+    }, {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
       beforeEnter: requiresAuth
     }, {
       path: '/logout',
