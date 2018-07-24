@@ -11,21 +11,16 @@
         <v-text-field
           label=""
           v-model="user.fName"
-          required
-          :rules="requiredRule"
-        ></v-text-field>
+          ></v-text-field>
         <v-text-field
           label=""
           v-model="user.lName"
-          required
-          :rules="requiredRule"
-        ></v-text-field>
+          ></v-text-field>
         <v-text-field
           label=""
           v-model="user.email"
-          required
-          :rules="requiredRule"
-        ></v-text-field>
+          >
+          </v-text-field>
         <v-text-field
           label=""
           v-model="user.password"
@@ -33,21 +28,15 @@
         <v-text-field
           label=""
           v-model="user.title"
-          required
-          :rules="requiredRule"
-        ></v-text-field>
+          ></v-text-field>
         <v-text-field
           label=""
           v-model="user.mbtiType"
-          required
-          :rules="requiredRule"
-        ></v-text-field>
+          ></v-text-field>
         <v-text-field
           label=""
           v-model="user.roles"
-          required
-          :rules="requiredRule"
-        ></v-text-field>
+          ></v-text-field>
 
         <v-btn color="primary" large @click="submit()">
           Save
@@ -100,11 +89,17 @@
         }
       },
       async submit() {
-        console.log('item', this.item);
-        this.item.userId = this.user._id;
-        this.item.status = 'Complete';
+        const user = {
+          email: user.email,
+          password: user.password,
+          title: user.title,
+          fName: user.fName,
+          lName: user.lName,
+          mtbiType: user.mtbiType,
+          roles: user.roles
+        };
         if (this.$refs.form.validate()) {
-          const {error, data} = await wrapper(services.userService.create(this.item));
+          const {error, data} = await wrapper(services.userService.create(this.user));
           if (error) {
             EventBus.$emit('showSnackbar', `There was an error saving your data: ${error}`, 'bottom', null, 'error');
           } else {

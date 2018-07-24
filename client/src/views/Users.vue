@@ -50,7 +50,7 @@
     },
 
     methods: {
-      async getUsers() {
+      async fetch() {
         const query = {
           query: {
             _aggregate: [
