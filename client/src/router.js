@@ -61,16 +61,11 @@ export default new Router({
     }, {
       path: '/admin',
       name: 'admin',
-      component: Admin,
-      beforeEnter: requiresAdmin
-    }, {
-      path: '/admin/users',
-      name: 'users',
       component: Users,
       beforeEnter: requiresAdmin
     }, {
-      path: '/admin/result/:id',
-      name: 'user:result',
+      path: '/admin/user/:id',
+      name: 'users',
       component: User,
       beforeEnter: requiresAdmin
     }, {

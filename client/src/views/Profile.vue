@@ -9,34 +9,26 @@
         lazy-validation
       >
         <v-text-field
-          label=""
+          label="First Name"
           v-model="user.fName"
-          ></v-text-field>
+        ></v-text-field>
         <v-text-field
-          label=""
+          label="Last Name"
           v-model="user.lName"
-          ></v-text-field>
+        ></v-text-field>
         <v-text-field
-          label=""
+          label="Email"
           v-model="user.email"
-          >
-          </v-text-field>
+        ></v-text-field>
         <v-text-field
-          label=""
+          label="To change your password, enter a new one here"
+          type="password"
           v-model="user.password"
         ></v-text-field>
         <v-text-field
-          label=""
+          label="Title"
           v-model="user.title"
-          ></v-text-field>
-        <v-text-field
-          label=""
-          v-model="user.mbtiType"
-          ></v-text-field>
-        <v-text-field
-          label=""
-          v-model="user.roles"
-          ></v-text-field>
+        ></v-text-field>
 
         <v-btn color="primary" large @click="submit()">
           Save
@@ -63,15 +55,13 @@
     },
     data() {
       return {
-        item: {
+        user: {
           hidePassword: false,
           email: '',
           password: '',
           title: '',
           fName: '',
-          lName: '',
-          mtbiType: '',
-          roles: ''
+          lName: ''
         },
         valid: true,
         requiredRule: [
@@ -89,17 +79,11 @@
         }
       },
       async submit() {
-        const user = {
-          email: user.email,
-          password: user.password,
-          title: user.title,
-          fName: user.fName,
-          lName: user.lName,
-          mtbiType: user.mtbiType,
-          roles: user.roles
-        };
+        if (!this.user.password) {
+          delete this.user.password;
+        }
         if (this.$refs.form.validate()) {
-          const {error, data} = await wrapper(services.userService.create(this.user));
+          const {error, data} = await wrapper(services.userService.patch(this.user._id, this.user));
           if (error) {
             EventBus.$emit('showSnackbar', `There was an error saving your data: ${error}`, 'bottom', null, 'error');
           } else {

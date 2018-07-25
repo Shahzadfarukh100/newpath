@@ -61,6 +61,8 @@
           lName: this.lName
         };
         const {error, data} = await wrapper(services.userService.create(user));
+        console.log('error', error);
+        console.log('data', data);
         if (error) {
           EventBus.$emit('showSnackbar', `There was an error signing up: ${error}`, 'bottom', null, 'error');
         } else {

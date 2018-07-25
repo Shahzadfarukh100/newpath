@@ -3,7 +3,7 @@
     <v-layout>
       <v-flex xs4 v-for="user in users" :key="user._id">
         <v-card fluid class="pa-3 text-xs-center">
-          <router-link :to="'/admin/result/' + user._id" class="nodec">
+          <router-link :to="'/admin/user/' + user._id" class="nodec">
             <h2>
               {{ user.fName }} {{ user.lName }}
             </h2>
@@ -130,7 +130,7 @@
       }
     },
     mounted() {
-      this.getUsers();
+      this.fetch();
     }
   }
 </script>

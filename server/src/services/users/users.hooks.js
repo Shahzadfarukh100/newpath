@@ -26,7 +26,7 @@ module.exports = {
       local.hooks.hashPassword()
     ],
     update: [
-
+      local.hooks.hashPassword()
     ],
     patch: [
 
