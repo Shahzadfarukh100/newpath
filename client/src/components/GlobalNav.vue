@@ -29,7 +29,10 @@
                 <div class="buttonTagline">{{ button.tagline }}</div>
                 <div class="pt-2"><img :src="button.image"></div>
                 <div class="buttonTitle">{{ button.title }}</div>
-                <div class="buttonDesc">{{ button.description }}</div>
+                <div class="buttonDesc" v-if="button.title === 'DESTINATION'">{{ destinationTag }}</div>
+                <div class="buttonDesc" v-else-if="button.title === 'JOURNEY'">{{ journeyTag }}</div>
+                <div class="buttonDesc" v-else-if="button.title === 'FUEL'">{{ fuelTag }}</div>
+                <div class="buttonDesc" v-else-if="button.title === 'GUARD RAILS'">{{ guardrailTag }}</div>
               </router-link>
             </v-card>
         </v-flex>
@@ -41,12 +44,20 @@
 </template>
 
 <script>
+  import * as services from '../services';
+  import wrapper from '../modules/asyncWrapper';
+
   export default {
     name: 'topnav',
     props: ['user'],
     data() {
       return {
         loggedIn: !!window.localStorage.getItem('feathers-jwt'),
+        tagLines: {},
+        destinationTag: '',
+        journeyTag: '',
+        guardrailTag: '',
+        fuelTag: '',
         buttonItems: [
           {
             link: '/destination',
@@ -75,6 +86,85 @@
           }
         ]
       }
+    },
+    methods: {
+      async getTaglines() {
+        const query = {
+          query: {
+            _aggregate: [
+              {
+                $lookup:
+                  {
+                    from: 'journeys',
+                    localField: '_id',
+                    foreignField: 'userId',
+                    as: 'journey'
+                  }
+              }, {
+                $unwind: {
+                  path : '$journey',
+                  preserveNullAndEmptyArrays: true
+                }
+              }, {
+                $lookup: {
+                  from: 'goals',
+                  localField: '_id',
+                  foreignField: 'userId',
+                  as: 'goal'
+                }
+              }, {
+                $unwind: {
+                  path: '$goal',
+                  preserveNullAndEmptyArrays: true
+                }
+              }, {
+                $lookup: {
+                  from: 'guardrails',
+                  localField: '_id',
+                  foreignField: 'userId',
+                  as: 'guardrail'
+                }
+              }, {
+                $unwind: {
+                  path: '$guardrail',
+                  preserveNullAndEmptyArrays: true
+                }
+              }, {
+                $lookup: {
+                  from: 'fuels',
+                  localField: '_id',
+                  foreignField: 'userId',
+                  as: 'fuel'
+                }
+              }, {
+                $unwind: {
+                  path: '$fuel',
+                  preserveNullAndEmptyArrays: true
+                }
+              }, {
+                $project: {
+                  journey: '$journey.keyStatement',
+                  destination: '$goal.keyStatement',
+                  fuel: '$fuel.keyStatement',
+                  guardrail: '$guardrail.keyStatement'
+                }
+              }
+            ]
+          }
+        };
+        const { error, data } = await wrapper(services.userService.find(query));
+        if (data) {
+          this.tagLines = data[0];
+          console.log('data', data[0]);
+          this.destinationTag = this.tagLines.destination;
+          this.journeyTag = this.tagLines.journey;
+          this.fuelTag = this.tagLines.fuel;
+          this.guardrailTag = this.tagLines.guardrail;
+        }
+      }
+    },
+    mounted() {
+      this.getTaglines();
     }
   }
 </script>

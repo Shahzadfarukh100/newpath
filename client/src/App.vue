@@ -27,28 +27,41 @@ HP</router-link>
       </v-btn>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down" v-if="!loggedIn">
-        <v-btn flat @click="nav('/login')">
-          <router-link to="/login">
-            Login
-          </router-link>
-        </v-btn>
-        <v-btn flat @click="nav('/signup')">
-          <router-link to="/signup">
-            Signup
-          </router-link>
-        </v-btn>
+        <v-tooltip bottom>
+          <v-btn slot="activator" flat @click="nav('/login')">
+            <router-link to="/login">
+              Login
+            </router-link>
+          </v-btn>
+          <span>Login</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+          <v-btn slot="activator" flat @click="nav('/signup')">
+            <router-link to="/signup">
+              Signup
+            </router-link>
+          </v-btn>
+          <span>Sign Up</span>
+        </v-tooltip>
       </v-toolbar-items>
       <v-toolbar-items class="hidden-sm-and-down" v-else>
-        <v-btn flat @click="nav('/')">
-          <router-link to="/">
-            <v-icon>get_app</v-icon>
-          </router-link>
-        </v-btn>
-        <v-btn flat @click="nav('/logout')">
-          <router-link to="/logout">
-            <v-icon>exit_to_app</v-icon>
-          </router-link>
-        </v-btn>
+        <v-tooltip bottom>
+          <v-btn slot="activator" flat @click="nav('/')">
+            <router-link to="/">
+              <v-icon>home</v-icon>
+            </router-link>
+          </v-btn>
+          <span>Home</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+          <v-btn slot="activator" flat @click="nav('/logout')">
+            <router-link to="/logout">
+              <v-icon>exit_to_app</v-icon>
+            </router-link>
+          </v-btn>
+          <span>Logout</span>
+        </v-tooltip>
+
       </v-toolbar-items>
     </v-toolbar>
     <v-content>

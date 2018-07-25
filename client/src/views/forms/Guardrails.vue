@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row wrap justify-center>
-      <topnav></topnav>
+      <topnav v-if="!admin"></topnav>
       <v-flex xs12 row>
         <v-card class="pa-5">
           <div class="text-xs-center">
@@ -15,106 +15,276 @@
             v-model="valid"
             lazy-validation
           >
+            <div class="text-xs-center">
+              <h2>Main Statement</h2>
+            </div>
+            <div class="text-xs-center">
+              <h3>
+                What does my life need to focus on?
+              </h3>
+            </div>
             <v-text-field
-              label="What does my life need to focus on?"
+              label=""
               v-model="item.keyStatement"
               required
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.keyStatement }}
+            </div>
+
+            <h3>
+              Faith
+            </h3>
+            <p>
+              Do you have any threats to your Faith that could pull you away from your goal Destination?
+            </p>
             <v-text-field
-              label="Do you have any threats to your Faith that could pull you away from your goal Destination?"
+              label=""
               v-model="item.faith"
               required
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.faith }}
+            </div>
+
+            <h3>
+              Relationships
+            </h3>
+            <p>
+              Do you have any current Relationships that do not align with or may pull you off track from you relationship goals?
+            </p>
             <v-text-field
-              label="Do you have any current Relationships that do not align with or may pull you off track from you relationship goals?"
+              label=""
               v-model="item.relationships"
               required
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.relationships }}
+            </div>
+
+            <h3>
+              Character
+            </h3>
+            <p>
+              Character increases our capacity and enables us to strive for goals. What area of your character needs to be strengthened?
+            </p>
             <v-text-field
-              label="Character increases our capacity and enables us to strive for goals. What area of your character needs to be strengthened?"
+              label=""
               v-model="item.character"
               required
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.character }}
+            </div>
+
+            <h3>
+              Health
+            </h3>
+            <p>
+              What could hinder you to achieve your Health goals?
+            </p>
             <v-text-field
-              label="What could hinder you to achieve your Health goals?"
+              label=""
               v-model="item.health"
               required
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.health }}
+            </div>
+
+            <h3>
+              Finances
+            </h3>
+            <p>
+              In your Finances, what are some things that you tend to purchase without budgeting?
+            </p>
             <v-text-field
-              label="In your Finances, what are some things that you tend to purchase without budgeting?"
+              label=""
               v-model="item.finances"
               required
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.finances }}
+            </div>
+
+            <h3>
+              Vocation
+            </h3>
+            <p>
+              Do you have a clear goal for your Vocation in 5 years? If so, what is it?
+            </p>
             <v-text-field
-              label="Do you have a clear goal for your Vocation in 5 years? If so, what is it?"
+              label=""
               v-model="item.vocation"
               required
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.vocation }}
+            </div>
+
+            <h3>
+              Goals
+            </h3>
+            <p>
+              What are some "threats" that pull you off track or lead you away from accomplishing goals?
+            </p>
             <v-text-field
-              label="What are some 'threats' that pull you off track or lead you away from accomplishing goals?"
+              label=""
               required
               v-model="item.goalThreats"
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.goalThreats }}
+            </div>
+
+            <h3>
+              Focus
+            </h3>
+            <p>
+              What are things that help you stay focused?
+            </p>
             <v-text-field
-              label="What are things that help you stay focused?"
+              label=""
               required
               v-model="item.focusItems"
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.focusItems }}
+            </div>
+
+            <h3>
+              Pitfalls
+            </h3>
+            <p>
+              Do you have a pitfall that you may struggle with?
+            </p>
             <v-text-field
-              label="Do you have a pitfall that you may struggle with?"
+              label=""
               required
               v-model="item.pitfalls"
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.pitfalls }}
+            </div>
+
+            <h3>
+              Encouragement
+            </h3>
+            <p>
+              What are the things that really encourage me to "do what is right"?
+            </p>
             <v-text-field
-              label="What are the things that really encourage me to 'do what is right'?"
+              label=""
               required
               v-model="item.encouragement"
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.encouragement }}
+            </div>
+
+            <h3>
+              Blind Spots
+            </h3>
+            <p>
+              Do I have any consistent tendencies or choices that cause me problems (blind spots)?
+            </p>
             <v-text-field
-              label="Do I have any consistent tendencies or choices that cause me problems (blind spots)?"
+              label=""
               required
               v-model="item.tendencies"
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.tendencies }}
+            </div>
+
+            <p>
+              Do you agree with the answers and would you add anything else?
+            </p>
             <v-text-field
-              label="Do you agree with the answers and would you add anything else?"
+              label=""
               required
               v-model="item.agreements"
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.agreements }}
+            </div>
+
+            <h3>
+              Life Criticals
+            </h3>
+            <p>
+              What principles protect most of your Life Criticals?
+            </p>
             <v-text-field
-              label="What principles protect most of your LifeCriticals?"
+              label=""
               required
               v-model="item.principles"
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
+            <div v-else>
+              {{ item.principles }}
+            </div>
+
+            <p>
+              What do you expect the outcome to be with this guardrail?
+            </p>
             <v-text-field
-              label="What do you expect the outcome to be with this guardrail?"
+              label=""
               required
               v-model="item.expectedOutcome"
               :rules="requiredRule"
+              v-if="type === 'edit'"
             ></v-text-field>
-            <v-btn color="primary" large @click="submit()">
-              Save
-            </v-btn>
-            <v-btn flat @click="clear()">
-              Cancel
-            </v-btn>
+            <div v-else>
+              {{ item.expectedOutcome }}
+            </div>
+
+            <div v-if="!admin">
+              <div v-if="type === 'edit'">
+                <v-btn color="primary" large @click="submit()">
+                  Save
+                </v-btn>
+                <v-btn flat @click="clear()">
+                  Cancel
+                </v-btn>
+              </div>
+              <div v-else>
+                <v-btn color="primary" large @click="type = 'edit'">
+                  Edit
+                </v-btn>
+              </div>
+            </div>
           </v-form>
         </v-card>
       </v-flex>
-      <v-flex xs12 row>
+      <v-flex xs12 row v-if="!admin">
         <pathfooter></pathfooter>
       </v-flex>
     </v-layout>
@@ -130,7 +300,7 @@
 
   export default {
     name: 'guardrails',
-    props: ['user'],
+    props: ['user', 'admin'],
     components: {
       topnav,
       pathfooter
@@ -158,7 +328,8 @@
         valid: true,
         requiredRule: [
           (v) => !!v || 'This field is required'
-        ]
+        ],
+        type: 'edit'
       }
     },
     methods: {
@@ -168,6 +339,7 @@
         if (data && data.data.length > 0 && data.data[0]) {
           console.log('data', data);
           this.item = data.data[0];
+          this.type = 'view';
         }
       },
       async submit() {
@@ -175,12 +347,24 @@
         this.item.userId = this.user._id;
         this.item.status = 'Complete';
         if (this.$refs.form.validate()) {
-          const {error, data} = await wrapper(services.guardrailsService.create(this.item));
-          if (error) {
-            EventBus.$emit('showSnackbar', `There was an error saving your data: ${error}`, 'bottom', null, 'error');
+          if (this.item._id) {
+            const {error, data} = await wrapper(services.guardrailsService.patch(this.item._id, this.item));
+            if (error) {
+              EventBus.$emit('showSnackbar', `There was an error updating your data: ${error}`, 'bottom', null, 'error');
+            } else {
+              console.log('It is all there');
+              EventBus.$emit('showSnackbar', `Your answers have been successfully updated!`, 'bottom', null, 'success');
+              this.type = 'view';
+            }
           } else {
-            console.log('It is all there');
-            EventBus.$emit('showSnackbar', `Your answers have been successfully saved!`, 'bottom', null, 'success');
+            const {error, data} = await wrapper(services.guardrailsService.create(this.item));
+            if (error) {
+              EventBus.$emit('showSnackbar', `There was an error saving your data: ${error}`, 'bottom', null, 'error');
+            } else {
+              console.log('It is all there');
+              EventBus.$emit('showSnackbar', `Your answers have been successfully saved!`, 'bottom', null, 'success');
+              this.type = 'view';
+            }
           }
         }
       },

@@ -4,7 +4,6 @@
       <v-flex xs6 offset-xs3>
         <v-text-field
           v-model="email"
-          :type="email"
           label="Email Address"
         >
         </v-text-field>

@@ -3,33 +3,35 @@
     <v-layout>
       <v-flex xs4 v-for="user in users" :key="user._id">
         <v-card fluid class="pa-3 text-xs-center">
-          <h2>
-            {{ user.fName }} {{ user.lName }}
-          </h2>
-          <div v-if="user.destination">
-            Destination: {{ user.destination.status }}
-          </div>
-          <div v-else>
-            Destination: Incomplete
-          </div>
-          <div v-if="user.journey">
-            Journey: {{ user.journey.status }}
-          </div>
-          <div v-else>
-            Journey: Incomplete
-          </div>
-          <div v-if="user.fuel">
-            Fuel: {{ user.fuel.status }}
-          </div>
-          <div v-else>
-            Fuel: Incomplete
-          </div>
-          <div v-if="user.guardrail">
-            Guardrail: {{ user.guardrail.status }}
-          </div>
-          <div v-else>
-            Guardrail: Incomplete
-          </div>
+          <router-link :to="'/admin/result/' + user._id" class="nodec">
+            <h2>
+              {{ user.fName }} {{ user.lName }}
+            </h2>
+            <div v-if="user.destination">
+              Destination: {{ user.destination.status }}
+            </div>
+            <div v-else>
+              Destination: Incomplete
+            </div>
+            <div v-if="user.journey">
+              Journey: {{ user.journey.status }}
+            </div>
+            <div v-else>
+              Journey: Incomplete
+            </div>
+            <div v-if="user.fuel">
+              Fuel: {{ user.fuel.status }}
+            </div>
+            <div v-else>
+              Fuel: Incomplete
+            </div>
+            <div v-if="user.guardrail">
+              Guardrail: {{ user.guardrail.status }}
+            </div>
+            <div v-else>
+              Guardrail: Incomplete
+            </div>
+          </router-link>
         </v-card>
       </v-flex>
     </v-layout>
@@ -69,14 +71,14 @@
                 }
               }, {
                 $lookup: {
-                  from: 'destinations',
+                  from: 'goals',
                   localField: '_id',
                   foreignField: 'userId',
-                  as: 'destination'
+                  as: 'goal'
                 }
               }, {
                 $unwind: {
-                  path: '$destination',
+                  path: '$goal',
                   preserveNullAndEmptyArrays: true
                 }
               }, {
@@ -110,7 +112,7 @@
                   email: 1,
                   roles: 1,
                   journey: '$journey',
-                  destination: '$destination',
+                  destination: '$goal',
                   fuel: '$fuel',
                   guardrail: '$guardrail'
                 }
@@ -134,5 +136,7 @@
 </script>
 
 <style scoped>
-
+  .nodec {
+    text-decoration: none;
+  }
 </style>

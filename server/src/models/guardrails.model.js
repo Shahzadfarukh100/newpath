@@ -18,7 +18,7 @@ module.exports = function (app) {
     character: { type: String, required: true },
     health: { type: String, required: true },
     finances: { type: String, required: true },
-    vocation: { type: Boolean, required: true },
+    vocation: { type: String, required: true },
     goalThreats: { type: String, required: true },
     focusItems: { type: String, required: true },
     pitfalls: { type: String, required: true },

@@ -7,7 +7,6 @@
         </h1>
         <v-text-field
           v-model="email"
-          :type="email"
           label="Email Address"
         >
         </v-text-field>
