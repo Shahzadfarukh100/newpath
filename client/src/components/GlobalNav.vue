@@ -23,12 +23,12 @@
 
         <v-layout row wrap>
 
-        <v-flex md3 v-for="button in buttonItems" :key="button.tagline">
+        <v-flex v-if="['home'].indexOf($route.name) > -1" md3 v-for="button in buttonItems" :key="button.tagline">
             <v-card class="button-row text-xs-center home-card">
               <router-link :to="button.link" :user="user">
-                <div class="buttonTagline">{{ button.tagline }}</div>
-                <div class="pt-2"><img :src="button.image"></div>
                 <div class="buttonTitle">{{ button.title }}</div>
+                <div class="pt-2"><img :src="button.image"></div>
+                <div class="buttonTagline">{{ button.tagline }}</div>
                 <div class="buttonDesc" v-if="button.title === 'DESTINATION'">{{ destinationTag }}</div>
                 <div class="buttonDesc" v-else-if="button.title === 'JOURNEY'">{{ journeyTag }}</div>
                 <div class="buttonDesc" v-else-if="button.title === 'FUEL'">{{ fuelTag }}</div>
@@ -66,23 +66,23 @@
             title: 'DESTINATION',
             description: 'In 5 years, I want to be in charge of a non-profit organization that improves the lives of children in third-world countries.'
           }, {
-            link: '/fuel',
-            tagline: 'Why I want to do it...',
-            image: '/img/fuel.svg',
-            title: 'FUEL',
-            description: 'Seeing other children in need makes me think of my own kids and how I would feel if I were the parent of a child...'
-          }, {
             link: '/journey',
-            tagline: 'How I\'m going to do it...',
+            tagline: 'How I\'m going to get there...',
             image: '/img/journey.svg',
             title: 'JOURNEY',
             description: 'TODAY, I will set daily reminders to lorem ipsum dolor sit amet, consecteur adiipiscing elit.'
           }, {
             link: '/guardrails',
             tagline: 'What will keep me on track...',
-            image: '/img/guardrails.svg',
+            image: '/img/guardrails.png',
             title: 'GUARD RAILS',
             description: 'Lorem ipsum dolor sit amet, consecteur adiipiscing elit.'
+          }, {
+            link: '/fuel',
+            tagline: 'Why I want to do it...',
+            image: '/img/fuel.svg',
+            title: 'FUEL',
+            description: 'Seeing other children in need makes me think of my own kids and how I would feel if I were the parent of a child...'
           }
         ]
       }
@@ -182,21 +182,6 @@
     background-color: #FFF;
     margin: 50px 10px 0 10px;
     padding: 5px;
-  }
-  .buttonTagline {
-    color: #8FC186;
-    font-size: 1.3rem;
-    font-weight: bold;
-  }
-  .buttonTitle {
-    color: #8FC186;
-    font-size: 2rem;
-    font-weight: bolder;
-  }
-  .buttonDesc {
-    color: #06B7DF;
-    font-style: italic;
-    font-weight: bold;
   }
   a {
     text-decoration: none;

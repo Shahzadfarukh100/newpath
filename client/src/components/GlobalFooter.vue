@@ -87,12 +87,12 @@
     margin-top: 125px !important;
   }
   .bottomTagline {
-    color: #8FC186;
+    color: #54AD62;
     font-size: 1.1rem;
     font-weight: bold;
     margin-bottom: 20px;
   }
   .iconHolder a, .iconHolder p {
-    color: #8FC186;
+    color: #54AD62;
   }
 </style>
