@@ -18,7 +18,7 @@
             <v-card-media
               height="200"
               width="100%"
-              src="/img/guardrails.svg"
+              src="/img/guardrails-lg.png"
               contain
             >
             </v-card-media>
