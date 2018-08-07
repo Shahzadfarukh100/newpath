@@ -31,8 +31,6 @@
                 <v-text-field
                   label="What I accomplish in a day. How my daily lifestyle impacts my future and my goals."
                   v-model="item.keyStatement"
-                  required
-                  :rules="requiredRule"
                   v-if="type === 'edit'"
                 ></v-text-field>
                 <div v-else>
@@ -50,8 +48,6 @@
             <v-text-field
               label=""
               v-model="item.faith"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -63,8 +59,6 @@
             <v-text-field
               label=""
               v-model="item.relationships"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -76,8 +70,6 @@
             <v-text-field
               label=""
               v-model="item.character"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -89,8 +81,6 @@
             <v-text-field
               label=""
               v-model="item.health"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -105,8 +95,6 @@
             <v-text-field
               label=""
               v-model="item.finances"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -118,8 +106,6 @@
             <v-text-field
               label=""
               v-model="item.vocation"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -181,9 +167,7 @@
             <p>What habits are positive for your lifestyle and Destination?</p>
             <v-text-field
               label=""
-              required
               v-model="item.positiveHabits"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -193,9 +177,7 @@
             <p>What habits could hold you back, and how can you eliminate or minimize them?</p>
             <v-text-field
               label=""
-              required
               v-model="item.negativeHabits"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>

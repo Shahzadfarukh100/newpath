@@ -31,8 +31,6 @@
               <v-text-field
                 label="What do you want to have accomplished in the next 5 years?"
                 v-model="item.keyStatement"
-                required
-                :rules="requiredRule"
                 v-if="this.type === 'edit'"
               ></v-text-field>
               <div v-else>
@@ -50,8 +48,6 @@
         <v-text-field
           label=""
           v-model="item.faith"
-          required
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -63,9 +59,7 @@
         <v-text-field
           label=""
           v-model="item.relationships"
-          required
           hint="These relationships can include boss, family, friends, etc. This statement needs to be a positive statement to guide these relationships."
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -77,8 +71,6 @@
         <v-text-field
           label=""
           v-model="item.character"
-          required
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -90,8 +82,6 @@
         <v-text-field
           label=""
           v-model="item.health"
-          required
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -106,8 +96,6 @@
         <v-text-field
           label=""
           v-model="item.finances"
-          required
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -119,8 +107,6 @@
         <v-text-field
           label=""
           v-model="item.vocation"
-          required
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -168,9 +154,7 @@
         <p>Who are your role models? Is there someone whom you both want to emulate and think you could emulate? Why?</p>
         <v-text-field
           label=""
-          required
           v-model="item.roleModels"
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -180,9 +164,7 @@
         <p>Is there something that particularly burdens you or that you want to improve about the world?</p>
         <v-text-field
           label=""
-          required
           v-model="item.burdens"
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>

@@ -30,9 +30,7 @@
           <div class="text-xs-center buttonDesc">
             <v-text-field
               label="What motivates you? What gets and keeps you going even in hard times?"
-              required
               v-model="item.keyStatement"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -47,8 +45,6 @@
         <v-text-field
           label=""
           v-model="item.purpose"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -59,8 +55,6 @@
         <v-text-field
           label=""
           v-model="item.uniqueDesign"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -72,8 +66,6 @@
         <v-text-field
           label=""
           v-model="item.passions"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -84,8 +76,6 @@
         <v-text-field
           label=""
           v-model="item.causes"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -96,8 +86,6 @@
         <v-text-field
           label=""
           v-model="item.stirring"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -107,9 +95,7 @@
         <p>Ask a friend what you talk the most about and 'invest' (time, money, etc) in.</p>
         <v-text-field
           label=""
-          required
           v-model="item.invest"
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -120,8 +106,6 @@
         <v-text-field
           label=""
           v-model="item.inspirations"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -132,8 +116,6 @@
         <v-text-field
           label=""
           v-model="item.hopes"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>

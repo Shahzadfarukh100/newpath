@@ -174,8 +174,8 @@
     padding: 0 16px 16px !important;
   }
   button.primary {
-  background-color: #06B7DF !important;
-  border-color: #06B7DF !important;
+  background-color: #069dbf !important;
+  border-color: #069dbf !important;
   }
   .profile-button {
   -webkit-box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
@@ -215,19 +215,19 @@
    }
    .card.home-card:after {
     content: "...";
-    color: #06B7DF;
+    color: #069dbf;
    }
    .buttonTagline {
      color: #54AD62;
      font-size: 1.3rem;
    }
    .buttonTitle {
-     color: #06B7DF;
+     color: #069dbf;
      font-size: 2rem;
      font-weight: bolder;
    }
    .buttonDesc {
-     color: #06B7DF;
+     color: #069dbf;
      font-style: italic;
    }
 
@@ -309,5 +309,4 @@
    padding: 16px;
    margin-top: 24px;
    }
-   
 </style>

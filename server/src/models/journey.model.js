@@ -7,14 +7,14 @@ module.exports = function (app) {
   const { Schema } = mongooseClient;
 
   const journey = new Schema({
-    userId: { type: Schema.Types.ObjectId, required: true },
-    keyStatement: { type: String, required: true },
-    faith: { type: String, required: true },
-    relationships: { type: String, required: true },
-    character: { type: String, required: true },
-    health: { type: String, required: true },
-    finances: { type: String, required: true },
-    vocation: { type: String, required: true },
+    userId: { type: Schema.Types.ObjectId },
+    keyStatement: { type: String },
+    faith: { type: String },
+    relationships: { type: String },
+    character: { type: String },
+    health: { type: String },
+    finances: { type: String },
+    vocation: { type: String },
     perfectDay: { type: String },
     addHabits: { type: String },
     changeHabits: { type: String },

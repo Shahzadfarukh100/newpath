@@ -31,8 +31,6 @@
               <v-text-field
                 label="What does my life need to focus on"
                 v-model="item.keyStatement"
-                required
-                :rules="requiredRule"
                 v-if="type === 'edit'"
               ></v-text-field>
               <div v-else>
@@ -54,8 +52,6 @@
             <v-text-field
               label=""
               v-model="item.faith"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -71,8 +67,6 @@
             <v-text-field
               label=""
               v-model="item.relationships"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -88,8 +82,6 @@
             <v-text-field
               label=""
               v-model="item.character"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -105,8 +97,6 @@
             <v-text-field
               label=""
               v-model="item.health"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -125,8 +115,6 @@
             <v-text-field
               label=""
               v-model="item.finances"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -142,8 +130,6 @@
             <v-text-field
               label=""
               v-model="item.vocation"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -158,9 +144,7 @@
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.goalThreats"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -172,9 +156,7 @@
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.focusItems"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -186,9 +168,7 @@
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.pitfalls"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -200,9 +180,8 @@
             </p>
             <v-text-field
               label=""
-              required
+
               v-model="item.encouragement"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -214,9 +193,7 @@
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.tendencies"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -228,9 +205,7 @@
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.agreements"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -242,9 +217,7 @@
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.principles"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -256,9 +229,7 @@
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.expectedOutcome"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
