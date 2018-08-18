@@ -1,99 +1,87 @@
 <template>
   <v-layout row wrap justify-center>
-    <v-flex xs12 md6 row>
-      <v-card style="padding: 16px;" v-if="!admin">
-        <div class="text-xs-center card-title buttonTagline">
-          Where I want to go...
-        </div>
-        <v-flex xs6 md4 offset-xs3 offset-md4>
-          <v-card-media
-            height="200"
-            width="100%"
-            src="/img/destination.svg"
-            contain
-          >
-          </v-card-media>
-        </v-flex>
-        <v-card-text class="text-xs-center">
-          <h1 class="buttonTitle">
-            DESTINATION
-          </h1>
-        </v-card-text>
-      </v-card>
-      <br>
+    <topnav class="hidden-sm-and-down" v-if="!admin"></topnav>
+    <v-flex xs12 md6 row form-view>
       <v-form
         name="destination"
         ref="form"
         v-model="valid"
         lazy-validation
       >
-        <div class="text-xs-center">
-          <h2>Goal Statement</h2>
-        </div>
-        <div class="text-xs-center">
-          <p>What do you want to have accomplished in the next 5 years?</p>
-        </div>
-        <v-text-field
-          label=""
-          v-model="item.keyStatement"
-          required
-          :rules="requiredRule"
-          v-if="this.type === 'edit'"
-        ></v-text-field>
-        <div v-else>
-          {{ item.keyStatement }}
-        </div>
-
+        <v-card class="form-card" v-if="!admin">
+          <v-card-text class="text-xs-center">
+            <h1 class="buttonTitle">
+              DESTINATION
+            </h1>
+          </v-card-text>
+          <v-flex xs6 md4 offset-xs3 offset-md4>
+            <v-card-media
+              height="200"
+              width="100%"
+              src="/img/destination.svg"
+              contain
+            >
+            </v-card-media>
+          </v-flex>
+          <v-card-text class="text-xs-center">
+            <div class="text-xs-center card-title buttonTagline">
+              Where I want to go...
+            </div>
+            <div class="text-xs-center buttonDesc">
+              <v-text-field
+                label="What do you want to have accomplished in the next 5 years?"
+                v-model="item.keyStatement"
+                v-if="this.type === 'edit'"
+              ></v-text-field>
+              <div v-else>
+                {{ item.keyStatement }}
+              </div>
+            </div>
+          </v-card-text>
+        </v-card>
+        <br>
         <div class="text-xs-center">
           <h2>Life Criticals</h2>
         </div>
-        <h3>Faith</h3>
+        <h3 class="faith">Faith</h3>
         <p>In five years, what do you want your Faith, relationship with God, to look like (i.e. Devotions, beliefs, prayer, church community, etc.)?</p>
         <v-text-field
           label=""
           v-model="item.faith"
-          required
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
           {{ item.faith }}
         </div>
 
-        <h3>Relationships</h3>
+        <h3 class="relationships">Relationships</h3>
         <p>In five years, what relationships do you have or hope to have? Who are they?</p>
         <v-text-field
           label=""
           v-model="item.relationships"
-          required
           hint="These relationships can include boss, family, friends, etc. This statement needs to be a positive statement to guide these relationships."
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
           {{ item.relationships }}
         </div>
 
-        <h3>Character</h3>
+        <h3 class="character">Character</h3>
         <p>In five years, what do you want your reputation to be. How have you conducted yourself? What do you want people to say about you?</p>
         <v-text-field
           label=""
           v-model="item.character"
-          required
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
           {{ item.character }}
         </div>
 
-        <h3>Health</h3>
+        <h3 class="health">Health</h3>
         <p>In five years, describe your health you desire to have?</p>
         <v-text-field
           label=""
           v-model="item.health"
-          required
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -103,26 +91,22 @@
         <div class="text-xs-center">
           <h2>Life Aides</h2>
         </div>
-        <h3>Finances</h3>
+        <h3 class="finances">Finances</h3>
         <p>In five years, where do you want your finances to be in a general sense (savings, debt, income, student loans, etc)?</p>
         <v-text-field
           label=""
           v-model="item.finances"
-          required
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
           {{ item.finances }}
         </div>
 
-        <h3>Vocation</h3>
+        <h3 class="vocation">Vocation</h3>
         <p>In five years, what do you hope to have accomplished for your career or job? What do you hope to be doing as your career or job?</p>
         <v-text-field
           label=""
           v-model="item.vocation"
-          required
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -170,9 +154,7 @@
         <p>Who are your role models? Is there someone whom you both want to emulate and think you could emulate? Why?</p>
         <v-text-field
           label=""
-          required
           v-model="item.roleModels"
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -182,27 +164,27 @@
         <p>Is there something that particularly burdens you or that you want to improve about the world?</p>
         <v-text-field
           label=""
-          required
           v-model="item.burdens"
-          :rules="requiredRule"
           v-if="this.type === 'edit'"
         ></v-text-field>
         <div v-else>
           {{ item.burdens }}
         </div>
-        <div v-if="!admin">
-          <div v-if="this.type === 'edit'">
-            <v-btn color="primary" large @click="submit()">
-              Save
-            </v-btn>
-            <v-btn flat @click="clear()">
-              Cancel
-            </v-btn>
-          </div>
-          <div v-else>
-            <v-btn color="primary" large @click="type = 'edit'">
-              Edit
-            </v-btn>
+        <div class="text-xs-center">
+          <div v-if="!admin">
+            <div v-if="this.type === 'edit'">
+              <v-btn color="primary" large @click="submit()">
+                Save
+              </v-btn>
+              <v-btn flat @click="clear()">
+                Cancel
+              </v-btn>
+            </div>
+            <div v-else>
+              <v-btn color="primary" large @click="type = 'edit'">
+                Edit
+              </v-btn>
+            </div>
           </div>
         </div>
       </v-form>

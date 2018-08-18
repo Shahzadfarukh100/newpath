@@ -29,7 +29,10 @@
           label="Title"
           v-model="user.title"
         ></v-text-field>
-
+        <v-text-field
+          label="Personality Type"
+          v-model="user.mbtiType"
+        ></v-text-field>
         <v-btn color="primary" large @click="submit()">
           Save
         </v-btn>
@@ -61,7 +64,8 @@
           password: '',
           title: '',
           fName: '',
-          lName: ''
+          lName: '',
+          mbtiType: ''
         },
         valid: true,
         requiredRule: [

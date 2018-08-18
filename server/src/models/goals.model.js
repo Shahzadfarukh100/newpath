@@ -7,19 +7,19 @@ module.exports = function (app) {
   const { Schema } = mongooseClient;
 
   const goals = new Schema({
-    userId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
-    faith: { type: String, required: true },
-    relationships: { type: String, required: true },
-    character: { type: String, required: true },
-    health: { type: String, required: true },
-    finances: { type: String, required: true },
-    vocation: { type: String, required: true },
+    userId: { type: Schema.Types.ObjectId, ref: 'users' },
+    faith: { type: String },
+    relationships: { type: String },
+    character: { type: String },
+    health: { type: String },
+    finances: { type: String },
+    vocation: { type: String },
     traitsFriends: { type: String },
     traitsAgree: { type: String },
     traitsSuprised: { type: String },
-    roleModels: { type: String, required: true },
-    burdens: { type: String, required: true },
-    keyStatement: { type: String, required: true },
+    roleModels: { type: String },
+    burdens: { type: String },
+    keyStatement: { type: String },
     status: { type: String, enum: ['Complete', 'Incomplete'], default: 'Incomplete', required: true }
   }, {
     timestamps: true

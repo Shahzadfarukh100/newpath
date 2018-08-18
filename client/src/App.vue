@@ -8,25 +8,32 @@
       app
       fixed
     >
-    <div v-if="['home'].indexOf($route.name) > -1" style="width: 100%; display:block; position: absolute; top: 35px; text-align: center; margin: 0;">
-      <div style="width: 60px; height: 60px; color: #8FC186; background: #ebf3e9; display:block; text-align: center; border-radius: 30px; border: 3px solid #8FC186; margin: 0 auto; ">
-        <span style="display: inline-block; margin: 4px auto 0; text-align: center; font-size: 32px; font-weight: bold;"><router-link to="/profile">
-HP</router-link>
+    <div v-if="['home'].indexOf($route.name) > -1" style="width: 100%; display:block; position: absolute; top: 3px; text-align: center; margin: 0;" id="profile-link">
+      <div class="profile-button" style="width: 80px; height: 80px; color: #54AD62; background: #ffffff; display:block; text-align: center; border-radius: 50px; border: 3px solid #54AD62; margin: 0 auto; opacity: .75; ">
+        <span style="display: inline-block; margin: 4px auto 0; text-align: center; font-size: 10px; font-weight: bold; position: relative; top: 10px;"><router-link to="/profile">
+<strong>{{ user.fName }}<br>{{ user.lName }}</strong><br>{{ user.mbtiType }}</router-link>
 </span>
       </div>
     </div>
-      <v-btn flat class="back-btn" @click="nav('/')" v-if="['destination', 'fuel', 'journey', 'guardrails', 'admin', 'users', 'profile'].indexOf($route.name) > -1">
-        <router-link to="/">
-          <v-icon>keyboard_arrow_left</v-icon>
-        </router-link>
-      </v-btn>
+    <v-toolbar-items class="" v-if="!loggedIn">
+    </v-toolbar-items>
+    <v-toolbar-items class="" v-else>
+      <v-tooltip bottom v-if="['destination', 'fuel', 'journey', 'guardrails', 'admin', 'users', 'profile'].indexOf($route.name) > -1">
+        <v-btn slot="activator" flat class="back-btn" @click="nav('/')">
+          <router-link to="/">
+            <v-icon>home</v-icon>
+          </router-link>
+        </v-btn>
+        <span>Home</span>
+      </v-tooltip>
       <v-btn flat @click="nav('/admin')" v-if="isAdmin">
         <router-link to="/admin">
           Admin
         </router-link>
       </v-btn>
+      </v-toolbar-items>
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-sm-and-down" v-if="!loggedIn">
+      <v-toolbar-items class="" v-if="!loggedIn">
         <v-tooltip bottom>
           <v-btn slot="activator" flat @click="nav('/login')">
             <router-link to="/login">
@@ -44,15 +51,7 @@ HP</router-link>
           <span>Sign Up</span>
         </v-tooltip>
       </v-toolbar-items>
-      <v-toolbar-items class="hidden-sm-and-down" v-else>
-        <v-tooltip bottom>
-          <v-btn slot="activator" flat @click="nav('/')">
-            <router-link to="/">
-              <v-icon>home</v-icon>
-            </router-link>
-          </v-btn>
-          <span>Home</span>
-        </v-tooltip>
+      <v-toolbar-items class="" v-else>
         <v-tooltip bottom>
           <v-btn slot="activator" flat @click="nav('/logout')">
             <router-link to="/logout">
@@ -110,10 +109,10 @@ HP</router-link>
       y: 'bottom',
       x: null,
       color: '',
-      user: null
+      user: {}
     }),
     props: {
-      source: String
+      source: String,
     },
     methods: {
       nav(page) {
@@ -174,6 +173,14 @@ HP</router-link>
   .container.main-container {
     padding: 0 16px 16px !important;
   }
+  button.primary {
+  background-color: #069dbf !important;
+  border-color: #069dbf !important;
+  }
+  .profile-button {
+  -webkit-box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+  box-shadow:  0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+  }
   .mountains {
     margin-left: -16px;
     margin-right: -16px;
@@ -183,7 +190,7 @@ HP</router-link>
   }
   h2 {
     font-weight:normal;
-    color: #96c58d;
+    color: #54AD62;
   }
   .slide-fade-enter-active {
    transition: all .3s ease;
@@ -200,9 +207,106 @@ HP</router-link>
    }
    nav.toolbar a {
    text-decoration: none;
-   color: #8FC186;
+   color: #54AD62;
    }
    .card.home-card {
-    height: 275px !important;
+    height: 295px !important;
+    padding: 15px !important;
+   }
+   .card.home-card:after {
+    content: "...";
+    color: #069dbf;
+   }
+   .buttonTagline {
+     color: #54AD62;
+     font-size: 1.3rem;
+   }
+   .buttonTitle {
+     color: #069dbf;
+     font-size: 2rem;
+     font-weight: bolder;
+   }
+   .buttonDesc {
+     color: #069dbf;
+     font-style: italic;
+   }
+
+   .buttonDesc[data-v-2f29c300] {
+   height: 60px;
+   overflow: hidden;
+   }
+
+   h3.faith {
+    background: url(/img/icons/MyNewPath_AppIcons_Faith.png) no-repeat center left;
+    background-size: 30px;
+    padding: 15px 40px 10px;
+   }
+
+   h3.relationships {
+    background: url(/img/icons/MyNewPath_AppIcons_Relationships.png) no-repeat center left;
+    background-size: 30px;
+    padding: 15px 40px 10px;
+    margin-top: 15px;
+   }
+
+   h3.character {
+    background: url(/img/icons/MyNewPath_AppIcons_MyCharacter.png) no-repeat center left;
+    background-size: 30px;
+    padding: 15px 40px 10px;
+    margin-top: 15px;
+   }
+
+   h3.health {
+    background: url(/img/icons/MyNewPath_AppIcons_Health.png) no-repeat center left;
+    background-size: 30px;
+    padding: 15px 40px 10px;
+    margin-top: 15px;
+   }
+
+   h3.finances {
+    background: url(/img/icons/MyNewPath_AppIcons_Finances.png) no-repeat center left;
+    background-size: 30px;
+    padding: 15px 40px 10px;
+    margin-top: 15px;
+   }
+
+   h3.vocation {
+    background: url(/img/icons/MyNewPath_AppIcons_Work.png) no-repeat center left;
+    background-size: 30px;
+    padding: 15px 40px 10px;
+    margin-top: 15px;
+   }
+
+   .form-view {
+   font-style: italic;
+   }
+
+   .form-view .form-card {
+   font-style: normal;
+   }
+
+   .form-view h2 {
+   margin-top: 24px;
+   font-style: normal;
+   }
+
+   .form-view h3 {
+   font-style: normal;
+   }
+
+   .form-view p {
+   margin: 16px 0;
+   font-weight: bold;
+   font-style: normal;
+   }
+
+   .form-view button {
+   margin: 24px 0 0;
+   font-style: normal;
+   }
+
+   .form-card {
+   padding: 16px;
+   margin-top: 24px;
    }
 </style>

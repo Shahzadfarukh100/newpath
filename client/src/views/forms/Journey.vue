@@ -1,204 +1,211 @@
 <template>
-  <v-container>
     <v-layout row wrap justify-center>
-      <topnav v-if="!admin"></topnav>
-      <v-flex xs12 row>
-        <v-card class="pa-5">
-          <div class="text-xs-center">
-            <h1>
-              JOURNEY
-            </h1>
-          </div>
+    <topnav class="hidden-sm-and-down" v-if="!admin"></topnav>
+      <v-flex xs12 md6 row form-view>
           <v-form
             name="destination"
             ref="form"
             v-model="valid"
             lazy-validation
           >
-            <v-text-field
-              label="What do I accomplish in a day? How does my daily lifestyle impact my future and achieve my goals?"
-              v-model="item.keyStatement"
-              required
-              :rules="requiredRule"
-              v-if="type === 'edit'"
-            ></v-text-field>
-            <div v-else>
-              What do I accomplish in a day? How does my daily lifestyle impact my future and achieve my goals?<br/>
-              {{ item.keyStatement }}
+          <v-card class="form-card" v-if="!admin">
+            <v-card-text class="text-xs-center">
+              <h1 class="buttonTitle">
+                JOURNEY
+              </h1>
+            </v-card-text>
+            <v-flex xs6 md4 offset-xs3 offset-md4>
+              <v-card-media
+              height="200"
+              width="100%"
+              src="/img/journey.svg"
+              contain
+              >
+              </v-card-media>
+            </v-flex>
+            <v-card-text class="text-xs-center">
+              <div class="text-xs-center card-title buttonTagline">
+              How I'm going to do it...
+              </div>
+              <div class="text-xs-center buttonDesc">
+                <v-text-field
+                  label="What I accomplish in a day. How my daily lifestyle impacts my future and my goals."
+                  v-model="item.keyStatement"
+                  v-if="type === 'edit'"
+                ></v-text-field>
+                <div v-else>
+                  {{ item.keyStatement }}
+                </div>
+              </div>
+            </v-card-text>
+          </v-card>
+            <br>
+            <div class="text-xs-center">
+              <h2>Life Criticals</h2>
             </div>
-
+            <h3 class="faith">Faith</h3>
+            <p>How do I daily build my faith?</p>
             <v-text-field
-              label="How do I daily build my faith?"
+              label=""
               v-model="item.faith"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
-              How do I daily build my faith?<br/>
               {{ item.faith }}
             </div>
 
+            <h3 class="relationships">Relationships</h3>
+            <p>How do I strengthen my important relationships each day?</p>
             <v-text-field
-              label="How do I strengthen my important relationships each day?"
+              label=""
               v-model="item.relationships"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
-              How do I strengthen my important relationships each day?<br/>
               {{ item.relationships }}
             </div>
 
+            <h3 class="character">Character</h3>
+            <p>What areas of my character need to be improved, and how do I work on them daily?</p>
             <v-text-field
-              label="What areas of my character need to be improved, and how do I work on them daily?"
+              label=""
               v-model="item.character"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
-              What areas of my character need to be improved, and how do I work on them daily?<br/>
               {{ item.character }}
             </div>
 
+            <h3 class="health">Health</h3>
+            <p>What are my daily habit that produce a physically healthy lifestyle?</p>
             <v-text-field
-              label="What are my daily habit that produce a physically healthy lifestyle?"
+              label=""
               v-model="item.health"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
-              What are my daily habit that produce a physically healthy lifestyle?<br/>
               {{ item.health }}
             </div>
 
+            <div class="text-xs-center">
+              <h2>Life Aides</h2>
+            </div>
+            <h3 class="finances">Finances</h3>
+            <p>How does my daily/ monthly spending and saving support my financial Destination goals?</p>
             <v-text-field
-              label="How does my daily/ monthly spending and saving support my financial Destination goals?"
+              label=""
               v-model="item.finances"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
-              How does my daily/ monthly spending and saving support my financial Destination goals?<br/>
               {{ item.finances }}
             </div>
 
+            <h3 class="vocation">Vocation</h3>
+            <p>What do activities do I complete daily or regularly to improve my skills for my vocation?</p>
             <v-text-field
-              label="What do activities do I complete daily or regularly to improve my skills for my vocation?"
+              label=""
               v-model="item.vocation"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
-              What do activities do I complete daily or regularly to improve my skills for my vocation?<br/>
               {{ item.vocation }}
             </div>
 
-            <p>
-              If you are still struggling to answer these questions to create your LifeMap&copy; destination, try this project.
-            </p>
+            <div class="text-xs-center">
+              <h2>Optional Additional Help</h2>
+            </div>
+            <div class="text-xs-center">
+              <p>
+                If you are still struggling to answer these questions, try this project.
+              </p>
+            </div>
+            <p>What does a perfect day look like for you?</p>
             <v-text-field
-              label="What does a perfect day look like for you?"
+              label=""
               v-model="item.perfectDay"
               hint="This should not be a vacation day, holiday, or 'day at the beach.' This should be a regular day in your vocation."
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
-              What does a perfect day look like for you?<br/>
               {{ item.perfectDay }}
             </div>
 
             <p>
-              What are some things that you need to add or change in your regular
+              What are some things that you need to add in your regular
               habits that could produce your "perfect day" more frequently?
             </p>
             <v-text-field
-              label="Things to add"
+              label=""
               v-model="item.addHabits"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
-              Things to add<br/>
               {{ item.addHabits }}
             </div>
 
+            <p>What are some things that you need to change?</p>
             <v-text-field
-              label="Things to change"
+              label=""
               v-model="item.changeHabits"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
-              Things to change<br/>
               {{ item.changeHabits }}
             </div>
 
-            <p>
-              Ask your friends these questions to understand yourself better. You can
-              also ask them where they see you in these 6 realms in 5 years. You can
-              also ask a friend these questions to help answer the above questions.
-            </p>
+            <p>Ask a friend what strengths and habits support your goals for 5 years from now.</p>
             <v-text-field
-              label="Ask a friend what strengths and habits support your goals for 5 years from now."
+              label=""
               v-model="item.strengths"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
-              Ask a friend what strengths and habits support your goals for 5 years from now.<br/>
               {{ item.strengths }}
             </div>
 
+            <p>What habits are positive for your lifestyle and Destination?</p>
             <v-text-field
-              label="What habits are positive for your lifestyle and Destination?"
-              required
+              label=""
               v-model="item.positiveHabits"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
-              What habits are positive for your lifestyle and Destination?<br/>
               {{ item.positiveHabits }}
             </div>
 
+            <p>What habits could hold you back, and how can you eliminate or minimize them?</p>
             <v-text-field
-              label="What habits could hold you back, and how can you eliminate or minimalize them?"
-              required
+              label=""
               v-model="item.negativeHabits"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
-              What habits could hold you back, and how can you eliminate or minimalize them?<br/>
               {{ item.negativeHabits }}
             </div>
-
-            <div v-if="!admin">
-              <div v-if="type === 'edit'">
-                <v-btn color="primary" large @click="submit()">
-                  Save
-                </v-btn>
-                <v-btn flat @click="clear()">
-                  Cancel
-                </v-btn>
-              </div>
-              <div v-else>
-                <v-btn color="primary" large @click="type = 'edit'">
-                  Edit
-                </v-btn>
+            <div class="text-xs-center">
+              <div v-if="!admin">
+                <div v-if="type === 'edit'">
+                  <v-btn color="primary" large @click="submit()">
+                    Save
+                  </v-btn>
+                  <v-btn flat @click="clear()">
+                    Cancel
+                  </v-btn>
+                </div>
+                <div v-else>
+                  <v-btn color="primary" large @click="type = 'edit'">
+                    Edit
+                  </v-btn>
+                </div>
               </div>
             </div>
           </v-form>
-        </v-card>
       </v-flex>
       <v-flex xs12 row v-if="!admin">
         <pathfooter></pathfooter>
       </v-flex>
     </v-layout>
-  </v-container>
 </template>
 
 <script>
@@ -295,7 +302,3 @@
     }
   }
 </script>
-
-<style>
-
-</style>

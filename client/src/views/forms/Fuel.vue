@@ -1,10 +1,19 @@
 <template>
   <v-layout row wrap justify-center>
-    <v-flex xs12 md6 row>
-      <v-card style="padding: 16px;" v-if="!admin">
-        <div class="text-xs-center card-title buttonTagline">
-          Why I want to do it...
-        </div>
+  <topnav class="hidden-sm-and-down" v-if="!admin"></topnav>
+    <v-flex xs12 md6 row form-view>
+      <v-form
+        name="destination"
+        ref="form"
+        v-model="valid"
+        lazy-validation
+      >
+      <v-card class="form-card" v-if="!admin">
+        <v-card-text class="text-xs-center">
+          <h1 class="buttonTitle">
+            FUEL
+          </h1>
+        </v-card-text>
         <v-flex xs6 md4 offset-xs3 offset-md4>
           <v-card-media
             height="200"
@@ -15,42 +24,27 @@
           </v-card-media>
         </v-flex>
         <v-card-text class="text-xs-center">
-          <h1 class="buttonTitle">
-            FUEL
-          </h1>
+          <div class="text-xs-center card-title buttonTagline">
+            Why I want to do it...
+          </div>
+          <div class="text-xs-center buttonDesc">
+            <v-text-field
+              label="What motivates you? What gets and keeps you going even in hard times?"
+              v-model="item.keyStatement"
+              v-if="type === 'edit'"
+            ></v-text-field>
+            <div v-else>
+              {{ item.keyStatement }}
+            </div>
+          </div>
         </v-card-text>
       </v-card>
       <br>
-      <v-form
-        name="destination"
-        ref="form"
-        v-model="valid"
-        lazy-validation
-      >
-      <div class="text-xs-center">
-        <h2>Main Motivation Statement</h2>
-      </div>
-      <div class="text-xs-center">
-        <p>What motivates you? What gets and keeps you going even in hard times?</p>
-      </div>
-        <v-text-field
-          label=""
-          required
-          v-model="item.keyStatement"
-          :rules="requiredRule"
-          v-if="type === 'edit'"
-        ></v-text-field>
-        <div v-else>
-          {{ item.keyStatement }}
-        </div>
-
-        <h3>Purpose</h3>
+        <h2>Purpose</h2>
         <p>What do you believe your purpose is on this earth?</p>
         <v-text-field
           label=""
           v-model="item.purpose"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -61,21 +55,17 @@
         <v-text-field
           label=""
           v-model="item.uniqueDesign"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
           {{ item.uniqueDesign }}
         </div>
 
-        <h3>Passion</h3>
+        <h2>Passion</h2>
         <p>What are you passionate about?</p>
         <v-text-field
           label=""
           v-model="item.passions"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -86,8 +76,6 @@
         <v-text-field
           label=""
           v-model="item.causes"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -98,8 +86,6 @@
         <v-text-field
           label=""
           v-model="item.stirring"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -109,21 +95,17 @@
         <p>Ask a friend what you talk the most about and 'invest' (time, money, etc) in.</p>
         <v-text-field
           label=""
-          required
           v-model="item.invest"
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
           {{ item.invest }}
         </div>
-        <h3>Inspiration</h3>
+        <h2>Inspiration</h2>
         <p>Who are the people who inspire you?</p>
         <v-text-field
           label=""
           v-model="item.inspirations"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
@@ -134,26 +116,26 @@
         <v-text-field
           label=""
           v-model="item.hopes"
-          required
-          :rules="requiredRule"
           v-if="type === 'edit'"
         ></v-text-field>
         <div v-else>
           {{ item.hopes }}
         </div>
-        <div v-if="!admin">
-          <div v-if="type === 'edit'">
-            <v-btn color="primary" large @click="submit()">
-              Save
-            </v-btn>
-            <v-btn flat @click="clear()">
-              Cancel
-            </v-btn>
-          </div>
-          <div v-else>
-            <v-btn color="primary" large @click="type = 'edit'">
-              Edit
-            </v-btn>
+        <div class="text-xs-center">
+          <div v-if="!admin">
+            <div v-if="type === 'edit'">
+              <v-btn color="primary" large @click="submit()">
+                Save
+              </v-btn>
+              <v-btn flat @click="clear()">
+                Cancel
+              </v-btn>
+            </div>
+            <div v-else>
+              <v-btn color="primary" large @click="type = 'edit'">
+                Edit
+              </v-btn>
+            </div>
           </div>
         </div>
       </v-form>

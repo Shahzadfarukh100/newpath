@@ -11,22 +11,22 @@ module.exports = function (app) {
   });
 
   const guardrails = new Schema({
-    userId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
-    keyStatement: { type: String, required: true },
-    faith: { type: String, required: true },
-    relationships: { type: String, required: true },
-    character: { type: String, required: true },
-    health: { type: String, required: true },
-    finances: { type: String, required: true },
-    vocation: { type: String, required: true },
-    goalThreats: { type: String, required: true },
-    focusItems: { type: String, required: true },
-    pitfalls: { type: String, required: true },
-    encouragement: { type: String, required: true },
-    tendencies: { type: String, required: true },
-    agreements: { type: String, required: true },
-    principles: { type: String, required: true },
-    expectedOutcome: { type: String, required: true },
+    userId: { type: Schema.Types.ObjectId, ref: 'users' },
+    keyStatement: { type: String },
+    faith: { type: String },
+    relationships: { type: String },
+    character: { type: String },
+    health: { type: String },
+    finances: { type: String },
+    vocation: { type: String },
+    goalThreats: { type: String },
+    focusItems: { type: String },
+    pitfalls: { type: String },
+    encouragement: { type: String },
+    tendencies: { type: String },
+    agreements: { type: String },
+    principles: { type: String },
+    expectedOutcome: { type: String },
     status: { type: String, enum: ['Complete', 'Incomplete'], default: 'Incomplete', required: true }
   }, {
     timestamps: true

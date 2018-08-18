@@ -1,40 +1,49 @@
 <template>
-  <v-container>
     <v-layout row wrap justify-center>
-      <topnav v-if="!admin"></topnav>
-      <v-flex xs12 row>
-        <v-card class="pa-5">
-          <div class="text-xs-center">
-            <h1>
+    <topnav class="hidden-sm-and-down" v-if="!admin"></topnav>
+      <v-flex xs12 md6 row form-view>
+        <v-form
+          name="destination"
+          ref="form"
+          v-model="valid"
+          lazy-validation
+        >
+        <v-card class="form-card" v-if="!admin">
+          <v-card-text class="text-xs-center">
+            <h1 class="buttonTitle">
               GUARDRAILS
             </h1>
-          </div>
-          <v-form
-            name="destination"
-            ref="form"
-            v-model="valid"
-            lazy-validation
-          >
-            <div class="text-xs-center">
-              <h2>Main Statement</h2>
+          </v-card-text>
+          <v-flex xs6 md4 offset-xs3 offset-md4>
+            <v-card-media
+              height="200"
+              width="100%"
+              src="/img/guardrails-lg.png"
+              contain
+            >
+            </v-card-media>
+          </v-flex>
+          <v-card-text class="text-xs-center">
+            <div class="text-xs-center card-title buttonTagline">
+              How I will stay on track...
             </div>
-            <div class="text-xs-center">
-              <h3>
-                What does my life need to focus on?
-              </h3>
+            <div class="text-xs-center buttonDesc">
+              <v-text-field
+                label="What does my life need to focus on"
+                v-model="item.keyStatement"
+                v-if="type === 'edit'"
+              ></v-text-field>
+              <div v-else>
+                {{ item.keyStatement }}
+              </div>
             </div>
-            <v-text-field
-              label=""
-              v-model="item.keyStatement"
-              required
-              :rules="requiredRule"
-              v-if="type === 'edit'"
-            ></v-text-field>
-            <div v-else>
-              {{ item.keyStatement }}
-            </div>
-
-            <h3>
+          </v-card-text>
+        </v-card>
+        <br>
+        <div class="text-xs-center">
+          <h2>Life Aides</h2>
+        </div>
+            <h3 class="faith">
               Faith
             </h3>
             <p>
@@ -43,15 +52,13 @@
             <v-text-field
               label=""
               v-model="item.faith"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
               {{ item.faith }}
             </div>
 
-            <h3>
+            <h3 class="relationships">
               Relationships
             </h3>
             <p>
@@ -60,15 +67,13 @@
             <v-text-field
               label=""
               v-model="item.relationships"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
               {{ item.relationships }}
             </div>
 
-            <h3>
+            <h3 class="character">
               Character
             </h3>
             <p>
@@ -77,15 +82,13 @@
             <v-text-field
               label=""
               v-model="item.character"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
               {{ item.character }}
             </div>
 
-            <h3>
+            <h3 class="health">
               Health
             </h3>
             <p>
@@ -94,15 +97,16 @@
             <v-text-field
               label=""
               v-model="item.health"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
               {{ item.health }}
             </div>
 
-            <h3>
+            <div class="text-xs-center">
+              <h2>Life Criticals</h2>
+            </div>
+            <h3 class="finances">
               Finances
             </h3>
             <p>
@@ -111,15 +115,13 @@
             <v-text-field
               label=""
               v-model="item.finances"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
               {{ item.finances }}
             </div>
 
-            <h3>
+            <h3 class="vocation">
               Vocation
             </h3>
             <p>
@@ -128,93 +130,70 @@
             <v-text-field
               label=""
               v-model="item.vocation"
-              required
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
               {{ item.vocation }}
             </div>
 
-            <h3>
-              Goals
-            </h3>
+            <div class="text-xs-center">
+              <h2>Optional Additional Help</h2>
+            </div>
             <p>
               What are some "threats" that pull you off track or lead you away from accomplishing goals?
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.goalThreats"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
               {{ item.goalThreats }}
             </div>
 
-            <h3>
-              Focus
-            </h3>
             <p>
               What are things that help you stay focused?
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.focusItems"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
               {{ item.focusItems }}
             </div>
 
-            <h3>
-              Pitfalls
-            </h3>
             <p>
               Do you have a pitfall that you may struggle with?
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.pitfalls"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
               {{ item.pitfalls }}
             </div>
 
-            <h3>
-              Encouragement
-            </h3>
             <p>
               What are the things that really encourage me to "do what is right"?
             </p>
             <v-text-field
               label=""
-              required
+
               v-model="item.encouragement"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
               {{ item.encouragement }}
             </div>
 
-            <h3>
-              Blind Spots
-            </h3>
             <p>
               Do I have any consistent tendencies or choices that cause me problems (blind spots)?
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.tendencies"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -226,26 +205,19 @@
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.agreements"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
               {{ item.agreements }}
             </div>
 
-            <h3>
-              Life Criticals
-            </h3>
             <p>
               What principles protect most of your Life Criticals?
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.principles"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
@@ -257,15 +229,13 @@
             </p>
             <v-text-field
               label=""
-              required
               v-model="item.expectedOutcome"
-              :rules="requiredRule"
               v-if="type === 'edit'"
             ></v-text-field>
             <div v-else>
               {{ item.expectedOutcome }}
             </div>
-
+            <div class="text-xs-center">
             <div v-if="!admin">
               <div v-if="type === 'edit'">
                 <v-btn color="primary" large @click="submit()">
@@ -281,14 +251,13 @@
                 </v-btn>
               </div>
             </div>
+            </div>
           </v-form>
-        </v-card>
       </v-flex>
       <v-flex xs12 row v-if="!admin">
         <pathfooter></pathfooter>
       </v-flex>
     </v-layout>
-  </v-container>
 </template>
 
 <script>

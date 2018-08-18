@@ -10,8 +10,7 @@ module.exports = function (app) {
     lName: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    title: { type: String, required: true, enum: [
-      'Mr', 'Ms', 'Mrs', 'Miss', 'Dr', 'Prof', 'Rev', 'Sir', 'Sister', 'Father'] },
+    title: { type: String, required: true },
     mbtiType: { type: String, enum: [
       'INTJ', 'INTP', 'ENTJ', 'ENTJ', 'ENTP', 'INFJ', 'INFP', 'ENFJ', 'ENFP', 'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP'
     ] },
