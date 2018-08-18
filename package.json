@@ -28,7 +28,7 @@
     "server": "cd server && node src/",
     "test:unit": "vue-cli-service test:unit",
     "mocha": "mocha server/test/ --recursive --exit",
-    "build": "vue0-cli-service build",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service test:unit"
   },
   "dependencies": {
