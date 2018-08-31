@@ -3,6 +3,8 @@ MAINTAINER Keymetrics <contact@keymetrics.io>
 
 RUN npm install pm2 -g
 
+RUN mkdir /app
+
 VOLUME ["/app"]
 
 # Expose ports
