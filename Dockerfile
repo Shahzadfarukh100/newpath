@@ -1,5 +1,5 @@
 FROM node:alpine
-MAINTAINER Keymetrics <contact@keymetrics.io>
+LABEL maintainer="contact@keymetrics.io"
 
 RUN npm install pm2 -g
 
@@ -7,7 +7,7 @@ RUN npm install
 
 COPY . /app
 
-VOLUME ["/app"]
+WORKDIR /app
 
 # Expose ports
 EXPOSE 80 443 43554
