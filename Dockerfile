@@ -5,9 +5,11 @@ RUN npm install pm2 -g
 
 RUN npm install
 
-COPY . /app
+RUN mkdir /app
 
 WORKDIR /app
+
+ADD . /app
 
 # Expose ports
 EXPOSE 80 443 43554
