@@ -9,7 +9,7 @@ let site;
 if (isDev) {
   site = 'http://localhost:3030';
 } else {
-  site = 'https://mynewpath.com';
+  site = 'http://54.214.201.34/api';
 }
 
 const socket = io(site);
