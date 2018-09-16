@@ -52,7 +52,7 @@
       }
     },
     methods: {
-      signup() {
+      async signup() {
         const user = {
           email: this.email,
           password: this.password,
@@ -60,7 +60,7 @@
           fName: this.fName,
           lName: this.lName
         };
-        const {error, data} = services.userService.create(user);
+        const {error, data} = await wrapper(services.userService.create(user));
         console.log('error', error);
         console.log('data', data);
         if (error) {
