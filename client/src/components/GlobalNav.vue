@@ -153,10 +153,7 @@
           }
         };
         const { error, data } = await wrapper(services.userService.find(query));
-        console.error(error)
         if (data) {
-          console.log(data)
-          console.log(data[0])
           this.tagLines = data[0];
           console.log('data', data[0]);
           this.destinationTag = this.tagLines.destination;

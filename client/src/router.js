@@ -40,7 +40,6 @@ const requiresAuth = async (to, from, next) => {
       }
     });
   } else {
-    this.loggedIn = true;
     next();
   }
 };
